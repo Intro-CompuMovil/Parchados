@@ -21,20 +21,6 @@ class Access : AppCompatActivity() {
     }
 
     /**
-     * @Name: setUpSignUpListener
-     * @Description: Set up the listener for the sign up button.
-     * @Parameters: None.
-     * @Return: None.
-     * @Throws: None.
-     */
-    private fun setUpSignUpListener() {
-        binding.buttonSignUp.setOnClickListener {
-            // Change to the sign up information screen
-            startActivity(Intent(this, SignUpInformationActivity::class.java))
-        }
-    }
-
-    /**
      * @Name: togglePasswordVisibility
      * @Description: Set up the listener for the eye button to toggle the password visibility.
      * @Parameters: None.
@@ -49,6 +35,20 @@ class Access : AppCompatActivity() {
                     PasswordTransformationMethod.getInstance()
             else // If the password is hidden
                 binding.inputPassword.transformationMethod = null // Show the password
+        }
+    }
+
+    /**
+     * @Name: setUpSignUpListener
+     * @Description: Set up the listener for the sign up button.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpSignUpListener() {
+        binding.buttonSignUp.setOnClickListener {
+            // Change to the sign up information screen
+            startActivity(Intent(this, SignUpInformationActivity::class.java))
         }
     }
 }
