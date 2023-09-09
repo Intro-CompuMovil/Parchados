@@ -1,3 +1,33 @@
 <resources>
+
+    <!--  General  -->
     <string name="app_name">Parchados</string>
+    <string name="app_name_capital_letters">Parchados</string>
+
+    <!--  Reusable  -->
+    <string name="text_sign_up">Sign Up</string>
+    <string name="text_password">Password</string>
+
+    <!--  Activity Access  -->
+    <string name="access_hint_user_or_email">Username or Email</string>
+    <string name="access_text_forgot_password">Forgot password?</string>
+    <string name="access_text_sign_in_with">Sign in with</string>
+
+    <!--  Activity SignUpInformation  -->
+    <string name="sign_up_information_tittle_first_name">First name</string>
+    <string name="sign_up_information_hint_first_name">Enter your first name</string>
+    <string name="sign_up_information_tittle_last_name">Last name</string>
+    <string name="sign_up_information_hint_last_name">Enter your last name</string>
+    <string name="sign_up_information_tittle_username">Username</string>
+    <string name="sign_up_information_hint_username">Enter your username</string>
+    <string name="sign_up_information_tittle_email">Email</string>
+    <string name="sign_up_information_hint_email">Enter your email</string>
+    <string name="sign_up_information_tittle_email_confirmation">Email confirmation</string>
+    <string name="sign_up_information_hint_email_confirmation">Enter your email again</string>
+    <string name="sign_up_information_hint_password">Enter your password</string>
+    <string name="sign_up_information_tittle_password_confirmation">Password confirmation</string>
+    <string name="sign_up_information_hint_password_confirmation">Enter your password again</string>
+    <string name="sign_up_information_button_next">Next</string>
+
+
 </resources>
