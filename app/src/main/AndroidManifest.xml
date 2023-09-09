@@ -12,12 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parchados"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activities.home.Learn"
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false" />
+        <activity
+            android:name=".activities.home.Parchar"
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false" />
         <activity
             android:name=".activities.signup.SignUpInformationActivity"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false" />
         <activity
             android:name=".activities.Access"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false" />
         <activity
             android:name=".Main"
