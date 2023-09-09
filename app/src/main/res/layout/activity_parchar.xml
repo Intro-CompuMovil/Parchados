@@ -236,7 +236,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/button_start_parche"
+            android:id="@+id/button_create_parche"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/icon_add"
