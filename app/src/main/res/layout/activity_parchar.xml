@@ -230,7 +230,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_font"
             android:gravity="center"
-            android:text="@string/parchar_text_start_parche"
+            android:text="@string/parchar_text_create_parche"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

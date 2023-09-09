@@ -36,10 +36,10 @@
     <string name="sign_up_information_button_next">Next</string>
 
     <!--  Activity Parchar  -->
-    <string name="parchar_text_start_parche">Start your own parche</string>
+    <string name="parchar_text_create_parche">Create your own parche</string>
 
     <!--  Activity Learn  -->
-    <string name="parchar_text_start_class">Start your own class</string>
+    <string name="parchar_text_create_class">Create your own class</string>
 
 
 </resources>
