@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.home.Parchar"
-    android:background="@drawable/background_color">
+    android:background="@drawable/background_color"
+    tools:context=".activities.home.Parchar">
 
     <LinearLayout
         android:id="@+id/linear_layout_welcome"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
@@ -76,38 +76,38 @@
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-<!--    <EditText-->
-<!--        android:id="@+id/edittext_search"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:autofillHints=""-->
-<!--        android:background="@drawable/shape_rectangle_2"-->
-<!--        android:drawableEnd="@drawable/icon_magnifying_glass"-->
-<!--        android:drawablePadding="16dp"-->
-<!--        android:hint="@string/parchar_text_search"-->
-<!--        android:fontFamily="@font/poppins_font"-->
-<!--        android:gravity="center"-->
-<!--        android:inputType="text"-->
-<!--        android:paddingStart="16dp"-->
-<!--        android:paddingEnd="16dp"-->
-<!--        android:paddingBottom="0dp"-->
-<!--        android:textAlignment="textStart"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textColorHint="@color/white"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
-<!--        tools:ignore="RtlCompat,RtlSymmetry" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/edittext_search"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginLeft="20dp"-->
+    <!--        android:layout_marginRight="20dp"-->
+    <!--        android:autofillHints=""-->
+    <!--        android:background="@drawable/shape_rectangle_2"-->
+    <!--        android:drawableEnd="@drawable/icon_magnifying_glass"-->
+    <!--        android:drawablePadding="16dp"-->
+    <!--        android:hint="@string/parchar_text_search"-->
+    <!--        android:fontFamily="@font/poppins_font"-->
+    <!--        android:gravity="center"-->
+    <!--        android:inputType="text"-->
+    <!--        android:paddingStart="16dp"-->
+    <!--        android:paddingEnd="16dp"-->
+    <!--        android:paddingBottom="0dp"-->
+    <!--        android:textAlignment="textStart"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textColorHint="@color/white"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
+    <!--        tools:ignore="RtlCompat,RtlSymmetry" />-->
 
     <EditText
         android:id="@+id/edittext_search"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:autofillHints=""
         android:background="@drawable/shape_rectangle_2"
@@ -117,10 +117,10 @@
         android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="35dp"
-        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_layout_welcome"
@@ -130,8 +130,8 @@
         android:id="@+id/imageview_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_magnifying_glass"
         android:layout_marginStart="90dp"
+        android:src="@drawable/icon_magnifying_glass"
         app:layout_constraintBottom_toBottomOf="@+id/edittext_search"
         app:layout_constraintEnd_toEndOf="@+id/edittext_search"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,11 +158,11 @@
         android:id="@+id/listview_sports"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_sports" />
@@ -247,10 +247,10 @@
         android:id="@+id/linear_layout_map"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:gravity="center"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_layout_start_parche">
@@ -258,9 +258,9 @@
         <ImageView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/example_map"
-            android:layout_height="match_parent"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 

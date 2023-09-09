@@ -1,9 +1,9 @@
 package com.loschimbitas.parchados.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.activities.home.Parchar
 import com.loschimbitas.parchados.activities.signup.SignUpInformationActivity
 import com.loschimbitas.parchados.databinding.ActivityAccessBinding
@@ -31,7 +31,7 @@ class Access : AppCompatActivity() {
     private fun togglePasswordVisibility() {
         binding.buttonEyePassword.setOnClickListener {
             if (binding.inputPassword.transformationMethod == null) // If the password is visible
-                // Hide the password
+            // Hide the password
                 binding.inputPassword.transformationMethod =
                     PasswordTransformationMethod.getInstance()
             else // If the password is hidden

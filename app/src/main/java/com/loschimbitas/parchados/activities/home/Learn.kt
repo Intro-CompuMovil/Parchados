@@ -1,9 +1,8 @@
 package com.loschimbitas.parchados.activities.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.databinding.ActivityLearnBinding
 
 class Learn : AppCompatActivity() {

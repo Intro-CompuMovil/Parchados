@@ -1,7 +1,7 @@
 package com.loschimbitas.parchados.activities.signup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.R
 
 class SignUpInformationActivity : AppCompatActivity() {
