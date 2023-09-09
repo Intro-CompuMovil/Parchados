@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import com.loschimbitas.parchados.activities.home.Parchar
 import com.loschimbitas.parchados.activities.signup.SignUpInformationActivity
 import com.loschimbitas.parchados.databinding.ActivityAccessBinding
 
@@ -17,7 +18,7 @@ class Access : AppCompatActivity() {
         setContentView(binding.root)
         togglePasswordVisibility()
         setUpSignUpListener()
-
+        setUpSignInListener()
     }
 
     /**
@@ -49,6 +50,20 @@ class Access : AppCompatActivity() {
         binding.buttonSignUp.setOnClickListener {
             // Change to the sign up information screen
             startActivity(Intent(this, SignUpInformationActivity::class.java))
+        }
+    }
+
+    /**
+     * @Name: setUpSignInListener
+     * @Description: Set up the listener for the sign in button.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpSignInListener() {
+        binding.buttonSignIn.setOnClickListener {
+            // Change to the parchar information screen
+            startActivity(Intent(this, Parchar::class.java))
         }
     }
 }
