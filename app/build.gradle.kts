@@ -43,6 +43,8 @@ android {
 dependencies {
     // To use gif images
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.27")
+    // To use circle imageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Default implementations
     implementation("androidx.core:core-ktx:1.10.1")
