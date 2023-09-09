@@ -3,6 +3,7 @@ package com.loschimbitas.parchados.activities.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.loschimbitas.parchados.activities.Parchar.CreateParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 
 class Parchar : AppCompatActivity() {
@@ -13,7 +14,43 @@ class Parchar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityParcharBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initListeners()
 
+    }
+
+    /**
+     * @Name: initListeners
+     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun initListeners() {
+        setUpCreateParcheListener()
+        setUpLearnListener()
+    }
+
+    /**
+     * @Name: setUpCreateParcheListener
+     * @Description: Set up the listener for the button that takes the user to the CreateParche activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpCreateParcheListener() {
+        binding.buttonCreateParche.setOnClickListener {
+            startActivity(Intent(this, CreateParche::class.java))
+        }
+    }
+
+    /**
+     * @Name: setUpLearnListener
+     * @Description: Set up the listener for the button that takes the user to the Learn activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpLearnListener() {
         binding.buttonLearn.setOnClickListener {
             startActivity(Intent(this, Learn::class.java))
             finish()
