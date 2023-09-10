@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.activities.parchar.CreateParche
+import com.loschimbitas.parchados.activities.parchar.JoinAParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 
 class Parchar : AppCompatActivity() {
@@ -38,6 +39,7 @@ class Parchar : AppCompatActivity() {
     private fun initListeners() {
         setUpCreateParcheListener()
         setUpLearnListener()
+        setUpMapViewListener()
     }
 
     /**
@@ -64,6 +66,19 @@ class Parchar : AppCompatActivity() {
         binding.buttonLearn.setOnClickListener {
             startActivity(Intent(this, Learn::class.java))
             finish()
+        }
+    }
+
+    /**
+     * @Name: setUpMapViewListener
+     * @Description: Set up the listener for the map view.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpMapViewListener() {
+        binding.mapView.setOnClickListener {
+            startActivity(Intent(this, JoinAParche::class.java))
         }
     }
 }
