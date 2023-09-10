@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import com.loschimbitas.parchados.activities.home.Parchar
+import com.loschimbitas.parchados.activities.learning.CreateClass
 import com.loschimbitas.parchados.activities.parchar.CreateParche
 import com.loschimbitas.parchados.databinding.ActivitySelectPlaceBinding
 
@@ -75,10 +77,10 @@ class SelectPlace : AppCompatActivity() {
                 var intentChange: Intent? = null
                 if (root == "CreateParche")
                     intentChange = Intent(this@SelectPlace, CreateParche::class.java)
-//                else if (root == "CreateClass")
-//                    startActivity(Intent(this@SelectPlace, CreateClass::class.java))
+                else if (root == "CreateClass")
+                    intentChange = Intent(this@SelectPlace, CreateClass::class.java)
                 else
-                    onBackPressed()
+                    intentChange = Intent(this@SelectPlace, Parchar::class.java)
 
                 startActivity(intentChange)
                 finish()
