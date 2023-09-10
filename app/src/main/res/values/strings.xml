@@ -5,6 +5,10 @@
     <string name="app_name_capital_letters">Parchados</string>
 
     <!--  Reusable  -->
+    <string name="text_by">By:</string>
+    <string name="text_name">name</string>
+    <string name="text_text">text</string>
+    <string name="text_count">count</string>
     <string name="text_sign_up">Sign Up</string>
     <string name="text_password">Password</string>
     <string name="exclamation_mark">!</string>
@@ -17,7 +21,8 @@
     <string name="textview_level">Level:</string>
     <string name="textview_time">Time:</string>
     <string name="textview_place">Place:</string>
-    <string name="text_students">Students</string>
+    <string name="text_students">Students:</string>
+    <string name="text_headcount">Headcount</string>
     <string name="text_go_exclamation_mark">Go!</string>
     <string name="text_maximum_students">Maximum students</string>
 
@@ -61,5 +66,11 @@
     <!--  Activity Create Class  -->
     <string name="create_parche_tittle">Create your class!</string>
     <string name="create_class_minutes_to_teach">Minutes to teach</string>
+    <string name="title_join_a_parche">Would you like to join this parche?</string>
+    <string name="text_number">number</string>
+
+
+    <!--  Activity Join a Parche  -->
+
 
 </resources>

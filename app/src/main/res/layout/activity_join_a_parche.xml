@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context=".activities.parchar.JoinAParche">
+
+    <TextView
+        android:id="@+id/title_join_a_parche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="40dp"
+        android:fontFamily="@font/poppins_font"
+        android:gravity="center"
+        android:text="@string/title_join_a_parche"
+        android:textAlignment="center"
+        android:textColor="@color/beige"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/map_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="24dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/example_map"
+        app:layout_constraintBottom_toTopOf="@+id/grid_layout_properties"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_join_a_parche"
+        tools:ignore="ContentDescription" />
+
+    <GridLayout
+        android:id="@+id/grid_layout_properties"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:columnCount="2"
+        android:rowCount="5"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/text_by"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_name"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_name"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/text_sport"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_sport"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_text"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/textview_level"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_level"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_text"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/textview_time"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_time"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_number"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/textview_place"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_place"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_text"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+
+        <TextView
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:text="@string/text_headcount"
+            android:textAlignment="textEnd"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/textview_headcount"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:fontFamily="@font/poppins_font"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/text_count"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat,RtlSymmetry" />
+    </GridLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="@color/dark_red"
+        android:fontFamily="@font/poppins_font"
+        android:paddingStart="60dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="60dp"
+        android:paddingBottom="3dp"
+        android:text="@string/text_go_exclamation_mark"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
