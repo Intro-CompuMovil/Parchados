@@ -87,7 +87,6 @@ class Learn : AppCompatActivity() {
     private fun setUpMapViewListener() {
         binding.mapView.setOnClickListener {
             startActivity(Intent(this, JoinAClass::class.java))
-            finish()
         }
     }
 }
