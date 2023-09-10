@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Parchados"
         tools:targetApi="31">
         <activity
+            android:name=".activities.selectplacemap.SelectPlace"
+            android:exported="false" />
+        <activity
             android:name=".activities.Parchar.CreateParche"
             android:exported="false" />
         <activity
