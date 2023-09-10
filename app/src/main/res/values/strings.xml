@@ -5,6 +5,7 @@
     <string name="app_name_capital_letters">Parchados</string>
 
     <!--  Reusable  -->
+    <string name="text_in">In</string>
     <string name="text_by">By:</string>
     <string name="text_name">name</string>
     <string name="text_text">text</string>
@@ -19,6 +20,7 @@
     <string name="text_sports">Sports:</string>
     <string name="text_sport">Sport:</string>
     <string name="text_number">number</string>
+    <string name="text_minutes">Minutes</string>
     <string name="textview_level">Level:</string>
     <string name="textview_time">Time:</string>
     <string name="textview_place">Place:</string>
@@ -74,6 +76,9 @@
 
     <!--  Activity Join a Class  -->
     <string name="title_join_a_class">Would you like to join this class?</string>
+    <string name="in_progress_remaining_time">Remaining time:</string>
+
+    <!--  Activity In Progress  -->
 
 
 </resources>
