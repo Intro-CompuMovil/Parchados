@@ -17,7 +17,9 @@
     <string name="textview_level">Level:</string>
     <string name="textview_time">Time:</string>
     <string name="textview_place">Place:</string>
+    <string name="text_students">Students</string>
     <string name="text_go_exclamation_mark">Go!</string>
+    <string name="text_maximum_students">Maximum students</string>
 
     <!--  Activity Access  -->
     <string name="access_hint_user_or_email">Username or Email</string>
@@ -55,5 +57,9 @@
 
     <!--  Activity Select Place  -->
     <string name="select_place_places_to">Places to</string>
+
+    <!--  Activity Create Class  -->
+    <string name="create_parche_tittle">Create your class!</string>
+    <string name="create_class_minutes_to_teach">Minutes to teach</string>
 
 </resources>
