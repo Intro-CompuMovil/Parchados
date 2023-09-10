@@ -243,26 +243,20 @@
             tools:ignore="ContentDescription" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_layout_map"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+    <ImageView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/example_map"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_layout_start_parche">
-
-        <ImageView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/example_map"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_start_parche"
+        tools:ignore="ContentDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
