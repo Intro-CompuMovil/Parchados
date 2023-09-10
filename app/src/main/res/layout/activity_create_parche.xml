@@ -25,33 +25,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraint_layout_properties"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_create_account"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="46dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_go"
         app:layout_constraintTop_toBottomOf="@+id/title_create_account">
 
         <LinearLayout
-            android:id="@+id/principal_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="24dp"
-            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <LinearLayout
                 android:id="@+id/linear_layout_sport"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -70,7 +68,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_weight="0.8"
                     android:gravity="center">
 
@@ -78,7 +76,6 @@
                         android:id="@+id/edittext_search_sport"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_margin="5dp"
                         android:autofillHints=""
                         android:background="@drawable/shape_rectangle_3"
                         android:fontFamily="@font/poppins_font"
@@ -113,12 +110,17 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
             <LinearLayout
                 android:id="@+id/linear_layout_level"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -139,7 +141,6 @@
                     android:id="@+id/edittext_level"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="5dp"
                     android:layout_weight="0.8"
                     android:autofillHints=""
                     android:background="@drawable/shape_rectangle_3"
@@ -153,19 +154,20 @@
                     android:textColorHint="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/linear_layout_time"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -186,7 +188,6 @@
                     android:id="@+id/edittext_time"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="5dp"
                     android:layout_weight="0.8"
                     android:autofillHints=""
                     android:background="@drawable/shape_rectangle_3"
@@ -200,112 +201,92 @@
                     android:textColorHint="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_place_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
+                android:orientation="horizontal"
+                tools:ignore="NestedWeights,UselessParent">
 
-                <LinearLayout
-                    android:id="@+id/linear_layout_place_1"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="NestedWeights,UselessParent">
+                    android:text="@string/textview_place"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:ignore="NestedWeights" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/textview_place"
-                        android:textColor="@color/white"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        tools:ignore="NestedWeights" />
-
-                    <EditText
-                        android:id="@+id/edittext_place"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.8"
-                        android:autofillHints=""
-                        android:background="@drawable/shape_rectangle_3"
-                        android:fontFamily="@font/poppins_font"
-                        android:gravity="center"
-                        android:hint="@string/create_parche_enter_an_address"
-                        android:inputType="text"
-                        android:paddingTop="6dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="RtlCompat" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_place_2"
+                <EditText
+                    android:id="@+id/edittext_place"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_weight="2.4"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.8"
+                    android:autofillHints=""
+                    android:background="@drawable/shape_rectangle_3"
+                    android:fontFamily="@font/poppins_font"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        tools:ignore="NestedWeights" />
-
-                    <Button
-                        android:id="@+id/button_select_place_on_map"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/shape_void"
-                        android:fontFamily="@font/poppins_font"
-                        android:gravity="center"
-                        android:paddingLeft="4dp"
-                        android:paddingTop="0dp"
-                        android:paddingRight="4dp"
-                        android:paddingBottom="0dp"
-                        android:text="@string/create_parche_or_select_the_place_on_the_map"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-
-                </LinearLayout>
+                    android:hint="@string/create_parche_enter_an_address"
+                    android:inputType="text"
+                    android:paddingTop="6dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    tools:ignore="NestedWeights" />
+
+                <Button
+                    android:id="@+id/button_select_place_on_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_margin="0dp"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/shape_void"
+                    android:fontFamily="@font/poppins_font"
+                    android:gravity="top|center"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="4dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/create_parche_or_select_the_place_on_the_map"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <Button
-        android:id="@+id/button_create_account"
+        android:id="@+id/button_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
