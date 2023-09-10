@@ -21,6 +21,7 @@ class Learn : AppCompatActivity() {
 //        binding.buttonStartClass.visibility = LinearLayout.INVISIBLE
 //        binding.buttonStartClass.isEnabled = false
 
+        initialize()
     }
 
     /**
