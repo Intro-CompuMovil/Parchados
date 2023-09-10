@@ -16,6 +16,17 @@ class Access : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initListeners()
+    }
+
+    /**
+     * @Name: initListeners
+     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun initListeners() {
         togglePasswordVisibility()
         setUpSignUpListener()
         setUpSignInListener()
