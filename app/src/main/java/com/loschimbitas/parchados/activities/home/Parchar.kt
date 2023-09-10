@@ -14,7 +14,7 @@ class Parchar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityParcharBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        initialize()
     }
 
     /**
