@@ -1,8 +1,7 @@
 package com.loschimbitas.parchados.activities.active
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.loschimbitas.parchados.R
+import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.databinding.ActivityInProgressBinding
 
 class InProgress : AppCompatActivity() {
@@ -17,10 +16,24 @@ class InProgress : AppCompatActivity() {
         initialize()
     }
 
+    /**
+     * @Name: initialize
+     * @Description: Initialize the activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
     private fun initialize() {
         initListeners()
     }
 
+    /**
+     * @Name: initListeners
+     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
     private fun initListeners() {
 
     }

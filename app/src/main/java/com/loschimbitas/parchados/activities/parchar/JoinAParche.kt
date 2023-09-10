@@ -19,8 +19,8 @@ class JoinAParche : AppCompatActivity() {
     }
 
     /**
-     * @Name: initListeners
-     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Name: initialize
+     * @Description: Initialize the activity.
      * @Parameters: None.
      * @Return: None.
      * @Throws: None.

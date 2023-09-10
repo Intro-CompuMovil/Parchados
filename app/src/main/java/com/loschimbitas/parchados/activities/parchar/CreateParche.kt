@@ -14,6 +14,17 @@ class CreateParche : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateParcheBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initialize()
+    }
+
+    /**
+     * @Name: initialize
+     * @Description: Initialize the activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun initialize() {
         initListeners()
     }
 
@@ -43,6 +54,4 @@ class CreateParche : AppCompatActivity() {
             finish()
         }
     }
-
-
 }

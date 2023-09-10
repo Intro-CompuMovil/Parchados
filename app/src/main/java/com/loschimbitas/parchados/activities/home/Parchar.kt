@@ -15,12 +15,13 @@ class Parchar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityParcharBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initialize()
     }
 
     /**
-     * @Name: initListeners
-     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Name: initialize
+     * @Description: Initialize the activity.
      * @Parameters: None.
      * @Return: None.
      * @Throws: None.

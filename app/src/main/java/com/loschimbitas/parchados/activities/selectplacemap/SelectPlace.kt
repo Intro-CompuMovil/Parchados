@@ -18,6 +18,7 @@ class SelectPlace : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectPlaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initialize()
     }
 
@@ -29,27 +30,8 @@ class SelectPlace : AppCompatActivity() {
      * @Throws: None.
      */
     private fun initialize() {
-        verifyRoot()
         initListeners()
-    }
-
-    /**
-     * @Name: verifyRoot
-     * @Description: Verify if the activity was called from the CreateParche activity.
-     * @Parameters: None.
-     * @Return: None.
-     * @Throws: None.
-     * @Annotations: SuppressLint("SetTextI18n") is used to avoid the warning of the setText method.
-     */
-    @SuppressLint("SetTextI18n")
-    private fun verifyRoot() {
-        val root = intent.getStringExtra("root")
-        if (root == "CreateParche")
-            binding.titleCreate.text = binding.titleCreate.text.toString() + " parchar!"
-        else if (root == "CreateClass")
-            binding.titleCreate.text = binding.titleCreate.text.toString() + " teach!"
-        else
-            onBackPressed()
+        verifyRoot()
     }
 
     /**
@@ -89,5 +71,24 @@ class SelectPlace : AppCompatActivity() {
 
         // Agrega el callback a la lista de callbacks
         onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    /**
+     * @Name: verifyRoot
+     * @Description: Verify if the activity was called from the CreateParche activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     * @Annotations: SuppressLint("SetTextI18n") is used to avoid the warning of the setText method.
+     */
+    @SuppressLint("SetTextI18n")
+    private fun verifyRoot() {
+        val root = intent.getStringExtra("root")
+        if (root == "CreateParche")
+            binding.titleCreate.text = binding.titleCreate.text.toString() + " parchar!"
+        else if (root == "CreateClass")
+            binding.titleCreate.text = binding.titleCreate.text.toString() + " teach!"
+        else
+            onBackPressed()
     }
 }

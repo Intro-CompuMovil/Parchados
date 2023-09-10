@@ -10,6 +10,7 @@ import com.loschimbitas.parchados.databinding.ActivityLearnBinding
 class Learn : AppCompatActivity() {
 
     private lateinit var binding: ActivityLearnBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLearnBinding.inflate(layoutInflater)
@@ -26,8 +27,8 @@ class Learn : AppCompatActivity() {
     }
 
     /**
-     * @Name: initListeners
-     * @Description: Initialize the listeners for the buttons in the activity.
+     * @Name: initialize
+     * @Description: Initialize the activity.
      * @Parameters: None.
      * @Return: None.
      * @Throws: None.
