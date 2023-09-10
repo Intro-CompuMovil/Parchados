@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import com.loschimbitas.parchados.activities.Parchar.CreateParche
+import com.loschimbitas.parchados.activities.parchar.CreateParche
 import com.loschimbitas.parchados.databinding.ActivitySelectPlaceBinding
 
 class SelectPlace : AppCompatActivity() {

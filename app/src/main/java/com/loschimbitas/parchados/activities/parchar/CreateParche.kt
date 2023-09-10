@@ -1,4 +1,4 @@
-package com.loschimbitas.parchados.activities.Parchar
+package com.loschimbitas.parchados.activities.parchar
 
 import android.content.Intent
 import android.os.Bundle

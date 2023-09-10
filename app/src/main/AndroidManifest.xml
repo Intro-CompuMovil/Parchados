@@ -16,7 +16,7 @@
             android:name=".activities.selectplacemap.SelectPlace"
             android:exported="false" />
         <activity
-            android:name=".activities.Parchar.CreateParche"
+            android:name=".activities.parchar.CreateParche"
             android:exported="false" />
         <activity
             android:name=".activities.home.Learn"
