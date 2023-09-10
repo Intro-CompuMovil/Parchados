@@ -2,15 +2,15 @@ package com.loschimbitas.parchados.activities.learning
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.loschimbitas.parchados.databinding.ActivityJoinAClasssBinding
+import com.loschimbitas.parchados.databinding.ActivityJoinAClassBinding
 
-class JoinAClasss : AppCompatActivity() {
+class JoinAClass : AppCompatActivity() {
 
-    private lateinit var binding: ActivityJoinAClasssBinding
+    private lateinit var binding: ActivityJoinAClassBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityJoinAClasssBinding.inflate(layoutInflater)
+        binding = ActivityJoinAClassBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
