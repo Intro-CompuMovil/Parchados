@@ -57,9 +57,8 @@ class Learn : AppCompatActivity() {
      * @Throws: None.
      */
     private fun setUpCreateClassListener() {
-        binding.buttonStartClass.setOnClickListener {
+        binding.buttonCreateClass.setOnClickListener {
             startActivity(Intent(this, CreateClass::class.java))
-            finish()
         }
     }
 

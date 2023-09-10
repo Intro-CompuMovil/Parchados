@@ -225,7 +225,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linear_layout_parchar_or_learn">
 
         <TextView
-            android:id="@+id/textView_start_class"
+            android:id="@+id/textView_create_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_font"
@@ -236,7 +236,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/button_start_class"
+            android:id="@+id/button_create_class"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/icon_add"
