@@ -40,6 +40,7 @@ class CreateParche : AppCompatActivity() {
             val intent = Intent(this, SelectPlace::class.java)
             intent.putExtra("root", "CreateParche")
             startActivity(intent)
+            finish()
         }
     }
 
