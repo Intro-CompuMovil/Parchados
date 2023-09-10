@@ -25,6 +25,7 @@ class InProgress : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+        verifyType()
     }
 
     /**
@@ -36,5 +37,13 @@ class InProgress : AppCompatActivity() {
      */
     private fun initListeners() {
 
+    }
+
+    private fun verifyType() {
+        val type = intent.getStringExtra("type")
+        if (type == "parche")
+            binding.aboutTitle.text = "Parche"
+        else if (type == "class")
+            binding.aboutTitle.text = "Class"
     }
 }

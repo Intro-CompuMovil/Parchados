@@ -79,6 +79,6 @@
     <string name="in_progress_remaining_time">Remaining time:</string>
 
     <!--  Activity In Progress  -->
-
+    <string name="text_finish">Finish</string>
 
 </resources>

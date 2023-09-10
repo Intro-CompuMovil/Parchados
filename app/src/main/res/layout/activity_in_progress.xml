@@ -126,7 +126,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="60dp"
         android:paddingBottom="3dp"
-        android:text="@string/text_go_exclamation_mark"
+        android:text="@string/text_finish"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
