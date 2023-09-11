@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Parchados"
         tools:targetApi="31">
         <activity
+            android:name=".activities.configuration.ProfileConfiguration"
+            android:exported="false" />
+        <activity
             android:name=".activities.configuration.ConfigurationMenu"
             android:exported="false" />
         <activity

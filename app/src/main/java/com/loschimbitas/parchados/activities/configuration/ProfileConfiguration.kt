@@ -1,17 +1,16 @@
 package com.loschimbitas.parchados.activities.configuration
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.loschimbitas.parchados.databinding.ActivityConfigurationMenuBinding
+import com.loschimbitas.parchados.databinding.ActivityProfileConfigurationBinding
 
-class ConfigurationMenu : AppCompatActivity() {
+class ProfileConfiguration : AppCompatActivity() {
 
-    private lateinit var binding: ActivityConfigurationMenuBinding
+    private lateinit var binding: ActivityProfileConfigurationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityConfigurationMenuBinding.inflate(layoutInflater)
+        binding = ActivityProfileConfigurationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initialize()
@@ -36,12 +35,6 @@ class ConfigurationMenu : AppCompatActivity() {
      * @Throws: None.
      */
     private fun initListeners() {
-        setUpProfileConfigurationListener()
-    }
 
-    private fun setUpProfileConfigurationListener() {
-        binding.buttonProfileConfiguration.setOnClickListener {
-            startActivity(Intent(this, ProfileConfiguration::class.java))
-        }
     }
 }
