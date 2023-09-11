@@ -22,12 +22,14 @@
     <string name="text_number">number</string>
     <string name="text_minutes">Minutes</string>
     <string name="textview_level">Level:</string>
+    <string name="text_ready">Ready</string>
     <string name="textview_time">Time:</string>
     <string name="textview_place">Place:</string>
     <string name="text_students">Students:</string>
     <string name="text_professor">Professor:</string>
     <string name="text_headcount">Headcount</string>
     <string name="text_go_exclamation_mark">Go!</string>
+    <string name="text_calification">Calification</string>
     <string name="text_maximum_students">Maximum students</string>
 
     <!--  Activity Access  -->
@@ -80,5 +82,9 @@
 
     <!--  Activity In Progress  -->
     <string name="text_finish">Finish</string>
+
+    <!--  Activity ShowUsers  -->
+    <string name="show_users_select_an_user_to_rate">Select an user to rate</string>
+    <string name="text_submit">Submit</string>
 
 </resources>
