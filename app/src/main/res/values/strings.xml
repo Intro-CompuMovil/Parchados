@@ -31,6 +31,7 @@
     <string name="text_go_exclamation_mark">Go!</string>
     <string name="text_calification">Calification</string>
     <string name="text_maximum_students">Maximum students</string>
+    <string name="text_rofile_configuration">Profile configuration</string>
 
     <!--  Activity Access  -->
     <string name="access_hint_user_or_email">Username or Email</string>
@@ -86,5 +87,12 @@
     <!--  Activity ShowUsers  -->
     <string name="show_users_select_an_user_to_rate">Select an user to rate</string>
     <string name="text_submit">Submit</string>
+
+    <!--  Activity RateUser  -->
+
+    <!--  Activity ConfigurationMenu  -->
+    <string name="configuration_menu_be_professor">Be professor</string>
+    <string name="configuration_menu_delete_account">Delete account</string>
+    <string name="configuration_menu_sign_out">Sign out</string>
 
 </resources>
