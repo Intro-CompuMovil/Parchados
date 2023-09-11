@@ -39,6 +39,13 @@ class ConfigurationMenu : AppCompatActivity() {
         setUpProfileConfigurationListener()
     }
 
+    /**
+     * @Name: setUpProfileConfigurationListener
+     * @Description: Set up the listener for the button that opens the profile configuration activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
     private fun setUpProfileConfigurationListener() {
         binding.buttonProfileConfiguration.setOnClickListener {
             startActivity(Intent(this, ProfileConfiguration::class.java))
