@@ -3,6 +3,7 @@ package com.loschimbitas.parchados.activities.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.parchar.CreateParche
 import com.loschimbitas.parchados.activities.parchar.JoinAParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
@@ -41,6 +42,7 @@ class Parchar : AppCompatActivity() {
         setUpCreateParcheListener()
         setUpLearnListener()
         setUpMapViewListener()
+        setUpConfigurationListener()
     }
 
     /**
@@ -80,6 +82,19 @@ class Parchar : AppCompatActivity() {
     private fun setUpMapViewListener() {
         binding.mapView.setOnClickListener {
             startActivity(Intent(this, JoinAParche::class.java))
+        }
+    }
+
+    /**
+     * @Name: setUpConfigurationListener
+     * @Description: Set up the listener for the configuration button.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpConfigurationListener() {
+        binding.profileImage.setOnClickListener {
+            startActivity(Intent(this, ConfigurationMenu::class.java))
         }
     }
 }
