@@ -51,4 +51,17 @@ class ConfigurationMenu : AppCompatActivity() {
             startActivity(Intent(this, ProfileConfiguration::class.java))
         }
     }
+
+    /**
+     * @Name: setUpBeProfessorListener
+     * @Description: Set up the listener for the button that opens the be professor activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpBeProfessorListener() {
+        binding.buttonBeProfessor.setOnClickListener {
+            startActivity(Intent(this, BeProfessor::class.java))
+        }
+    }
 }
