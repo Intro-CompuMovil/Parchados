@@ -95,4 +95,11 @@
     <string name="configuration_menu_delete_account">Delete account</string>
     <string name="configuration_menu_sign_out">Sign out</string>
 
+    <!--  Activity ProfileConfiguration  -->
+
+    <!--  Activity BeProfessor  -->
+
+    <!--  Activity DeleteAccount  -->
+    <string name="delete_account_enter_your_password_to_confirm">Enter your password to confirm</string>
+
 </resources>

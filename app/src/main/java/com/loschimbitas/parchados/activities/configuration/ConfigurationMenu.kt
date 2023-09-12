@@ -37,6 +37,8 @@ class ConfigurationMenu : AppCompatActivity() {
      */
     private fun initListeners() {
         setUpProfileConfigurationListener()
+        setUpBeProfessorListener()
+        setUpDeleteAccountListener()
     }
 
     /**
@@ -62,6 +64,19 @@ class ConfigurationMenu : AppCompatActivity() {
     private fun setUpBeProfessorListener() {
         binding.buttonBeProfessor.setOnClickListener {
             startActivity(Intent(this, BeProfessor::class.java))
+        }
+    }
+
+    /**
+     * @Name: setUpDeleteAccountListener
+     * @Description: Set up the listener for the button that opens the delete account activity.
+     * @Parameters: None.
+     * @Return: None.
+     * @Throws: None.
+     */
+    private fun setUpDeleteAccountListener() {
+        binding.buttonDeleteAccount.setOnClickListener {
+            startActivity(Intent(this, DeleteAccount::class.java))
         }
     }
 }

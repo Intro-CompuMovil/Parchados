@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Parchados"
         tools:targetApi="31">
         <activity
+            android:name=".activities.configuration.DeleteAccount"
+            android:exported="false" />
+        <activity
             android:name=".activities.configuration.BeProfessor"
             android:exported="false" />
         <activity
