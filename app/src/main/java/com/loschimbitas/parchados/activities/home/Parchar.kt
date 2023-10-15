@@ -77,6 +77,9 @@ class Parchar : AppCompatActivity() {
             // Utiliza la ubicación actual como punto inicial
             mapController.setZoom(18.0)
             mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+
+            showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+            showMarker(GeoPoint(4.6327,-74.0656))
         } else {
             Toast.makeText(this, "Ubicación no encontrada", Toast.LENGTH_SHORT).show()
         }
@@ -191,28 +194,21 @@ class Parchar : AppCompatActivity() {
                 // Puedes mostrar un mensaje o realizar otras acciones aquí
             }
 
-            // También puedes realizar otras acciones relacionadas con el mapa aquí
         }
     }
 
-// ...
-
-
-// ...
 
     // Método para mostrar el marcador en la ubicación actual
     private fun showMarker(geoPoint: GeoPoint) {
+
         // Elimina cualquier marcador existente
-        binding.osmMap.overlays.removeAll { it is Marker }
+        //binding.osmMap.overlays.removeAll { it is Marker }
 
         // Crea y muestra un nuevo marcador en la ubicación proporcionada
         val marker = Marker(binding.osmMap)
         marker.title = "Mi ubicación"
         marker.position = geoPoint
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-
-        // Aquí puedes personalizar el icono del marcador según tus necesidades
-        // marker.icon = resources.getDrawable(R.drawable.mi_icono_personalizado)
 
         binding.osmMap.overlays.add(marker)
     }
