@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
+import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.globales.Globales
 import com.loschimbitas.parchados.activities.parchar.CreateParche
@@ -67,23 +68,29 @@ class Parchar : AppCompatActivity() {
         // Variables para mapas
         binding.osmMap.onResume()
 
-        // Obtén la ubicación actual del usuario
+        // ubicacon actual
         val currentLocation = getCurrentLocation()
 
-        // Verifica si se pudo obtener la ubicación actual
+        // Verificacion de ubicacion actual
         if (currentLocation != null) {
             val mapController: IMapController = binding.osmMap.controller
 
-            // Utiliza la ubicación actual como punto inicial
             mapController.setZoom(18.0)
             mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
 
-            showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude))
-            showMarker(GeoPoint(4.6327,-74.0656))
+            // establecimiento de puntos(marcadores)
+            showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude),"Mi ubicacion","UBI")
+            showMarker(GeoPoint(4.6318,-74.0667),"Ping Pong", "PING")
+            showMarker(GeoPoint(4.6285,-74.0647),"Fulbol","FUTB")
+            showMarker(GeoPoint(4.6256,-74.0653),"Tenis","TENI")
+            showMarker(GeoPoint(4.6454,-74.0618),"Voleibol","VOLE")
+            showMarker(GeoPoint(4.6318,-74.0615),"Basketball","BASK")
+
         } else {
             Toast.makeText(this, "Ubicación no encontrada", Toast.LENGTH_SHORT).show()
         }
     }
+
     // fin onResume
 
     // inicio onPause
@@ -177,7 +184,7 @@ class Parchar : AppCompatActivity() {
 
     private fun setUpMapViewListener() {
         binding.osmMap.setOnClickListener {
-            // Obtén la ubicación actual del usuario
+            // ubicacion actual del usuario
             val currentLocation = getCurrentLocation()
 
             // Verifica si se pudo obtener la ubicación actual
@@ -188,10 +195,9 @@ class Parchar : AppCompatActivity() {
                 mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
 
                 // Muestra un marcador en la ubicación actual
-                showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+                showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude),"Mi ubicacion" , "UBI")
             } else {
-                // Maneja el caso en el que no se pudo obtener la ubicación
-                // Puedes mostrar un mensaje o realizar otras acciones aquí
+                // cuando no se puede obtener la ubicacion actual
             }
 
         }
@@ -199,19 +205,30 @@ class Parchar : AppCompatActivity() {
 
 
     // Método para mostrar el marcador en la ubicación actual
-    private fun showMarker(geoPoint: GeoPoint) {
+    private fun showMarker(geoPoint: GeoPoint, markerName: String, tipo: String) {
 
-        // Elimina cualquier marcador existente
-        //binding.osmMap.overlays.removeAll { it is Marker }
 
         // Crea y muestra un nuevo marcador en la ubicación proporcionada
         val marker = Marker(binding.osmMap)
-        marker.title = "Mi ubicación"
+        marker.title = markerName
         marker.position = geoPoint
+
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
+        //icono personalizado segun el deporte
+        when(tipo){
+            "UBI" -> marker.icon = resources.getDrawable(R.drawable.persona, theme)
+            "PING" -> marker.icon = resources.getDrawable(R.drawable.pingpong, theme)
+            "TENI" -> marker.icon = resources.getDrawable(R.drawable.tenis, theme)
+            "BASK" -> marker.icon = resources.getDrawable(R.drawable.basketball, theme)
+            "FUTB" -> marker.icon = resources.getDrawable(R.drawable.futbol, theme)
+            "VOLE" -> marker.icon = resources.getDrawable(R.drawable.voleibol, theme)
+        }
 
         binding.osmMap.overlays.add(marker)
     }
+
+
 
     private fun getCurrentLocation(): Location? {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
