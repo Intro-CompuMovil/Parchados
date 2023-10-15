@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Parchados" parent="Base.Theme.Parchados" />
+
+    <style name="ThemeOverlay.AppCompat.navTheme">
+        <item name="android:colorForeground">@color/black</item>
+    </style>
 </resources>

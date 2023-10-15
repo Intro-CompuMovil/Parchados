@@ -3,6 +3,8 @@ package com.loschimbitas.parchados.activities.configuration
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.databinding.ActivityConfigurationMenuBinding
 
 class ConfigurationMenu : AppCompatActivity() {
@@ -17,6 +19,20 @@ class ConfigurationMenu : AppCompatActivity() {
         initialize()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!userGlobal.imageUrl.equals("")) {
+            setUpPlayerInformation()
+        }
+    }
+
+//    override fun onRestart() {
+//        super.onRestart()
+//        if (!userGlobal.imageUrl.equals("") && !userGlobal.username.equals("")) {
+//            setUpPlayerInformation()
+//        }
+//    }
+
     /**
      * @Name: initialize
      * @Description: Initialize the activity.
@@ -26,6 +42,11 @@ class ConfigurationMenu : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+    }
+
+    private fun setUpPlayerInformation() {
+        binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+        binding.profileName.text = userGlobal.username
     }
 
     /**

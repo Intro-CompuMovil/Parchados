@@ -31,7 +31,7 @@
     <string name="text_go_exclamation_mark">Go!</string>
     <string name="text_calification">Calification</string>
     <string name="text_maximum_students">Maximum students</string>
-    <string name="text_rofile_configuration">Profile configuration</string>
+    <string name="text_profile_configuration">Profile configuration</string>
 
     <!--  Activity Access  -->
     <string name="access_hint_user_or_email">Username or Email</string>
@@ -101,5 +101,18 @@
 
     <!--  Activity DeleteAccount  -->
     <string name="delete_account_enter_your_password_to_confirm">Enter your password to confirm</string>
+    <string name="content_description_take_photo">Take a picture of yourself</string>
+    <string name="content_description_upload_photo">Upload a picture of yourself</string>
+    <string name="profile_configuration_hint_about">Tell everyone about you</string>
+    <string name="profile_configuration_hint_age">Add age</string>
+    <string name="about">about</string>
+    <string name="profile_configuration_button_save">Save</string>
+
+    <!--    Parte de la cámara -->
+
+    <string name="temp_images_dir">temp_images</string>
+    <string name="temp_image">temp_image.jpg</string>
+    <string name="authorities">com.loschimbitas.parchados.fileprovider</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

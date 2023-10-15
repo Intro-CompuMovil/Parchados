@@ -1,12 +1,23 @@
 package com.loschimbitas.parchados.activities.home
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
+import com.loschimbitas.parchados.activities.globales.Globales
 import com.loschimbitas.parchados.activities.learning.CreateClass
 import com.loschimbitas.parchados.activities.learning.JoinAClass
 import com.loschimbitas.parchados.databinding.ActivityLearnBinding
+import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.library.BuildConfig
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.MapEventsOverlay
 
 class Learn : AppCompatActivity() {
 
@@ -23,8 +34,14 @@ class Learn : AppCompatActivity() {
 //        binding.textViewStartClass.textSize = 0f
 //        binding.buttonStartClass.visibility = LinearLayout.INVISIBLE
 //        binding.buttonStartClass.isEnabled = false
-
         initialize()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!Globales.userGlobal.imageUrl.equals("")) {
+            setUpPlayerInformation()
+        }
     }
 
     /**
@@ -36,6 +53,12 @@ class Learn : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+        setUpPlayerInformation()
+    }
+
+    private fun setUpPlayerInformation() {
+        binding.profileImage.setImageURI(Globales.userGlobal.imageUrl.toUri())
+        binding.profileName.text = Globales.userGlobal.username
     }
 
     /**
@@ -87,9 +110,13 @@ class Learn : AppCompatActivity() {
      * @Throws: None.
      */
     private fun setUpMapViewListener() {
-        binding.mapView.setOnClickListener {
-            startActivity(Intent(this, JoinAClass::class.java))
-        }
+//        binding.mapView.setOnClickListener {
+//            startActivity(Intent(this, JoinAClass::class.java))
+//        }
+        Configuration.getInstance().userAgentValue = BuildConfig.BUILD_TYPE
+        binding.osmMap.setTileSource(TileSourceFactory.MAPNIK)
+        binding.osmMap.setMultiTouchControls(true)
+
     }
 
     /**
@@ -104,4 +131,6 @@ class Learn : AppCompatActivity() {
             startActivity(Intent(this, ConfigurationMenu::class.java))
         }
     }
+
+
 }
