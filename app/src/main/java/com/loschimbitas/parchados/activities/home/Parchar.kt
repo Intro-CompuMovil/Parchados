@@ -3,13 +3,16 @@ package com.loschimbitas.parchados.activities.home
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
@@ -18,16 +21,21 @@ import com.loschimbitas.parchados.activities.parchar.CreateParche
 import com.loschimbitas.parchados.activities.parchar.JoinAParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 import org.osmdroid.api.IMapController
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.Road
+import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import org.osmdroid.views.overlay.TilesOverlay
+import java.io.IOException
 
 class Parchar : AppCompatActivity() {
 
     private lateinit var binding: ActivityParcharBinding
-
+    private var roadOverlay:Polyline?= null
+    private lateinit var roadManager: RoadManager
 
 
     private val locationPermissions = registerForActivityResult(
@@ -50,9 +58,9 @@ class Parchar : AppCompatActivity() {
 
         askForPermissions()
 
+        roadManager = OSRMRoadManager(this, "ANDROID")
+
         initialize()
-
-
 
     }
 
@@ -213,6 +221,11 @@ class Parchar : AppCompatActivity() {
         marker.title = markerName
         marker.position = geoPoint
 
+        marker.setOnMarkerClickListener { _, _ ->
+            calculateRouteToMarker(geoPoint)
+            true
+        }
+
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
 
         //icono personalizado segun el deporte
@@ -228,6 +241,69 @@ class Parchar : AppCompatActivity() {
         binding.osmMap.overlays.add(marker)
     }
 
+    private fun calculateRouteToMarker(destinationPoint: GeoPoint) {
+        // Inicia la tarea asíncrona para calcular la ruta
+        GetRouteTask().execute(destinationPoint)
+    }
+
+    private inner class GetRouteTask : AsyncTask<GeoPoint, Void, Road>() {
+        override fun doInBackground(vararg params: GeoPoint): Road? {
+            val routePoints = ArrayList<GeoPoint>()
+
+            // Obtener la ubicación actual del usuario
+            val currentLocation = getCurrentLocation()
+            if (currentLocation != null) {
+                routePoints.add(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+            } else {
+                //showToast("No se pudo obtener la ubicación actual")
+                return null
+            }
+
+            // Agregar el destino a los puntos de la ruta
+            routePoints.add(params[0]) // Destino
+
+            return roadManager.getRoad(routePoints)
+        }
+
+        override fun onPostExecute(result: Road?) {
+            super.onPostExecute(result)
+            if (result != null) {
+                // Dibujar la ruta
+                drawRoadOverlay(result)
+            } else {
+                //showToast("Error al obtener la ruta")
+            }
+        }
+    }
+
+    private fun drawRoute(start: GeoPoint, finish: GeoPoint) {
+        GetRouteTask().execute(finish)
+    }
+
+    private fun drawRoadOverlay(road: Road) {
+        roadOverlay?.let { binding.osmMap.overlays.remove(it) }
+        roadOverlay = RoadManager.buildRoadOverlay(road)
+        roadOverlay?.outlinePaint?.color = ContextCompat.getColor(this, R.color.red)
+        roadOverlay?.outlinePaint?.strokeWidth = 10f
+        binding.osmMap.overlays.add(roadOverlay)
+    }
+
+    private fun buscarCiudadPorNombre(nombreCiudad: String): GeoPoint? {
+        val mGeocoder = Geocoder(baseContext)
+        val addressString = nombreCiudad
+        if (addressString.isNotEmpty()) {
+            try {
+                val addresses = mGeocoder.getFromLocationName(addressString, 2)
+                if (!addresses.isNullOrEmpty()) {
+                    val addressResult = addresses[0]
+                    return GeoPoint(addressResult.latitude, addressResult.longitude)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        return null
+    }
 
 
     private fun getCurrentLocation(): Location? {
