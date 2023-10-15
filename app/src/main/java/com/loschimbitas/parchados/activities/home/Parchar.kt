@@ -2,9 +2,14 @@ package com.loschimbitas.parchados.activities.home
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.globales.Globales
@@ -13,15 +18,15 @@ import com.loschimbitas.parchados.activities.parchar.JoinAParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 import org.osmdroid.api.IMapController
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.MapEventsOverlay
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polyline
+import org.osmdroid.views.overlay.TilesOverlay
 
 class Parchar : AppCompatActivity() {
 
     private lateinit var binding: ActivityParcharBinding
 
-    // Variables del mapa
-    val latitude = 4.62
-    val longitude = -74.07
-    val startPoint = GeoPoint(latitude, longitude)
 
 
     private val locationPermissions = registerForActivityResult(
@@ -53,6 +58,7 @@ class Parchar : AppCompatActivity() {
     // inicio onResume
     override fun onResume() {
         super.onResume()
+
         // Variables de usuario global
         if (!Globales.userGlobal.imageUrl.equals("")) {
             setUpPlayerInformation()
@@ -60,9 +66,20 @@ class Parchar : AppCompatActivity() {
 
         // Variables para mapas
         binding.osmMap.onResume()
-        val mapController: IMapController = binding.osmMap.controller
-        mapController.setZoom(18.0)
-        mapController.setCenter(this.startPoint)
+
+        // Obtén la ubicación actual del usuario
+        val currentLocation = getCurrentLocation()
+
+        // Verifica si se pudo obtener la ubicación actual
+        if (currentLocation != null) {
+            val mapController: IMapController = binding.osmMap.controller
+
+            // Utiliza la ubicación actual como punto inicial
+            mapController.setZoom(18.0)
+            mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+        } else {
+            Toast.makeText(this, "Ubicación no encontrada", Toast.LENGTH_SHORT).show()
+        }
     }
     // fin onResume
 
@@ -151,15 +168,75 @@ class Parchar : AppCompatActivity() {
      * @Return: None.
      * @Throws: None.
      */
+    // ...
+
+    // ...
+
     private fun setUpMapViewListener() {
-//        binding.mapView.setOnClickListener {
-//            startActivity(Intent(this, JoinAParche::class.java))
-//        }
-//        El mapa debe inicializarse en la ubicación actual del usuario
-        val mapController: IMapController = binding.osmMap.controller
-        mapController.setZoom(18.0)
-        mapController.setCenter(this.startPoint)
+        binding.osmMap.setOnClickListener {
+            // Obtén la ubicación actual del usuario
+            val currentLocation = getCurrentLocation()
+
+            // Verifica si se pudo obtener la ubicación actual
+            if (currentLocation != null) {
+                // Centra el mapa en la ubicación actual del usuario
+                val mapController: IMapController = binding.osmMap.controller
+                mapController.setZoom(18.0)
+                mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+
+                // Muestra un marcador en la ubicación actual
+                showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+            } else {
+                // Maneja el caso en el que no se pudo obtener la ubicación
+                // Puedes mostrar un mensaje o realizar otras acciones aquí
+            }
+
+            // También puedes realizar otras acciones relacionadas con el mapa aquí
+        }
     }
+
+// ...
+
+
+// ...
+
+    // Método para mostrar el marcador en la ubicación actual
+    private fun showMarker(geoPoint: GeoPoint) {
+        // Elimina cualquier marcador existente
+        binding.osmMap.overlays.removeAll { it is Marker }
+
+        // Crea y muestra un nuevo marcador en la ubicación proporcionada
+        val marker = Marker(binding.osmMap)
+        marker.title = "Mi ubicación"
+        marker.position = geoPoint
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
+        // Aquí puedes personalizar el icono del marcador según tus necesidades
+        // marker.icon = resources.getDrawable(R.drawable.mi_icono_personalizado)
+
+        binding.osmMap.overlays.add(marker)
+    }
+
+    private fun getCurrentLocation(): Location? {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        return try {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return null
+            }
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
 
     /**
      * @Name: setUpConfigurationListener
