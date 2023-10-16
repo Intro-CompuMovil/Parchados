@@ -8,6 +8,10 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.AsyncTask
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -214,8 +218,6 @@ class Parchar : AppCompatActivity() {
 
     // Método para mostrar el marcador en la ubicación actual
     private fun showMarker(geoPoint: GeoPoint, markerName: String, tipo: String) {
-
-
         // Crea y muestra un nuevo marcador en la ubicación proporcionada
         val marker = Marker(binding.osmMap)
         marker.title = markerName
@@ -223,12 +225,13 @@ class Parchar : AppCompatActivity() {
 
         marker.setOnMarkerClickListener { _, _ ->
             calculateRouteToMarker(geoPoint)
+            showCustomToast(markerName, getMarkerIconResource(tipo))
             true
         }
 
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
 
-        //icono personalizado segun el deporte
+        // Icono personalizado según el deporte
         when(tipo){
             "UBI" -> marker.icon = resources.getDrawable(R.drawable.persona, theme)
             "PING" -> marker.icon = resources.getDrawable(R.drawable.pingpong, theme)
@@ -241,6 +244,34 @@ class Parchar : AppCompatActivity() {
         binding.osmMap.overlays.add(marker)
     }
 
+    private fun getMarkerIconResource(tipo: String): Int {
+        return when (tipo) {
+            "UBI" -> R.drawable.persona
+            "PING" -> R.drawable.pingpong
+            "TENI" -> R.drawable.tenis
+            "BASK" -> R.drawable.basketball
+            "FUTB" -> R.drawable.futbol
+            "VOLE" -> R.drawable.voleibol
+            else -> R.drawable.parche
+        }
+    }
+
+    private fun showCustomToast(markerName: String, markerIconResource: Int) {
+        val inflater: LayoutInflater = layoutInflater
+        val layout: View = inflater.inflate(R.layout.toast_custom, findViewById(R.id.toast_layout_root))
+
+        val textView: TextView = layout.findViewById(R.id.textViewToast)
+        textView.text = "En camino a $markerName"
+
+        val imageView: ImageView = layout.findViewById(R.id.imageViewToast)
+        imageView.setImageResource(markerIconResource)
+
+        val toast = Toast(this)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
+    }
+    
     private fun calculateRouteToMarker(destinationPoint: GeoPoint) {
         // Inicia la tarea asíncrona para calcular la ruta
         GetRouteTask().execute(destinationPoint)
