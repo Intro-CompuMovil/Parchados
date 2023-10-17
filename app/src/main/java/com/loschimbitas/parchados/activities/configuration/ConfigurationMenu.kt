@@ -4,17 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.loschimbitas.parchados.activities.Access
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.databinding.ActivityConfigurationMenuBinding
 
 class ConfigurationMenu : AppCompatActivity() {
 
     private lateinit var binding: ActivityConfigurationMenuBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConfigurationMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
 
         initialize()
     }
@@ -60,6 +66,7 @@ class ConfigurationMenu : AppCompatActivity() {
         setUpProfileConfigurationListener()
         setUpBeProfessorListener()
         setUpDeleteAccountListener()
+        SetUpSignOutListener()
     }
 
     /**
@@ -98,6 +105,17 @@ class ConfigurationMenu : AppCompatActivity() {
     private fun setUpDeleteAccountListener() {
         binding.buttonDeleteAccount.setOnClickListener {
             startActivity(Intent(this, DeleteAccount::class.java))
+        }
+    }
+
+    private fun SetUpSignOutListener(){
+        binding.buttonSignOut.setOnClickListener {
+            auth.signOut()
+            // Redirigir al usuario de nuevo a la pantalla de inicio
+            val intent = Intent(this, Access::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish() // Esto cierra la actividad actual
         }
     }
 }

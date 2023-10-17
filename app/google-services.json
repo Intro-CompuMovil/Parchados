@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398551023651",
+    "project_id": "parchados-c30bd",
+    "storage_bucket": "parchados-c30bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398551023651:android:4eccd7d8e949ba51983196",
+        "android_client_info": {
+          "package_name": "com.loschimbitas.parchados"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwYwHtVkFYZWrPFpkVQ_DeeafECOjFOEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
