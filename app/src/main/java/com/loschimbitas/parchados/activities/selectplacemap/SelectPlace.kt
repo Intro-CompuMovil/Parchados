@@ -8,11 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.activities.home.Parchar
 import com.loschimbitas.parchados.activities.learning.CreateClass
 import com.loschimbitas.parchados.activities.parchar.CreateParche
+import com.loschimbitas.parchados.databinding.ActivityLearnBinding
 import com.loschimbitas.parchados.databinding.ActivitySelectPlaceBinding
+import org.osmdroid.bonuspack.routing.RoadManager
+import org.osmdroid.views.overlay.Polyline
 
 class SelectPlace : AppCompatActivity() {
 
     private lateinit var binding: ActivitySelectPlaceBinding
+    private var roadOverlay: Polyline?= null
+    private lateinit var roadManager: RoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
