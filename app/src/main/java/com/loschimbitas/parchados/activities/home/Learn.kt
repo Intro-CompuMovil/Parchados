@@ -2,10 +2,14 @@ package com.loschimbitas.parchados.activities.home
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.globales.Globales
@@ -78,8 +82,40 @@ class Learn : AppCompatActivity() {
         if (!Globales.userGlobal.imageUrl.equals("")) {
             setUpPlayerInformation()
         }
+
+        // Variables para mapas
+        binding.osmMap.onResume()
+
+
+        // ubicacon actual
+        val currentLocation = getCurrentLocation()
+
     }
 
+    private fun getCurrentLocation(): Location? {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        return try {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return null
+            }
+            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.osmMap.onPause()
+    }
     /**
      * @Name: initialize
      * @Description: Initialize the activity.

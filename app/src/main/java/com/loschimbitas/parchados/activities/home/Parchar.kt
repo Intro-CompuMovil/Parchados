@@ -133,6 +133,8 @@ class Parchar : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+        setUpPlayerInformation()
+
     }
 
     private fun setUpPlayerInformation() {
