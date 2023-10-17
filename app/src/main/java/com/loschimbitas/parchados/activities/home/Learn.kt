@@ -5,11 +5,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.os.AsyncTask
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
@@ -20,6 +26,7 @@ import com.loschimbitas.parchados.databinding.ActivityLearnBinding
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 import org.osmdroid.api.IMapController
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.Road
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
@@ -159,6 +166,77 @@ class Learn : AppCompatActivity() {
         }
 
         binding.osmMap.overlays.add(marker)
+    }
+
+    private fun getMarkerIconResource(tipo: String): Int {
+        return when (tipo) {
+            "UBI" -> R.drawable.persona
+            "PING" -> R.drawable.pingpong
+            "TENI" -> R.drawable.tenis
+            "BASK" -> R.drawable.basketball
+            "FUTB" -> R.drawable.futbol
+            "VOLE" -> R.drawable.voleibol
+            else -> R.drawable.parche
+        }
+    }
+
+    private fun showCustomToast(markerName: String, markerIconResource: Int) {
+        val inflater: LayoutInflater = layoutInflater
+        val layout: View = inflater.inflate(R.layout.toast_custom, findViewById(R.id.toast_layout_root))
+
+        val textView: TextView = layout.findViewById(R.id.textViewToast)
+        textView.text = "En camino a $markerName"
+
+        val imageView: ImageView = layout.findViewById(R.id.imageViewToast)
+        imageView.setImageResource(markerIconResource)
+
+        val toast = Toast(this)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
+    }
+
+    private fun calculateRouteToMarker(destinationPoint: GeoPoint) {
+        // Inicia la tarea asíncrona para calcular la ruta
+        GetRouteTask().execute(destinationPoint)
+    }
+
+    private inner class GetRouteTask : AsyncTask<GeoPoint, Void, Road>() {
+        override fun doInBackground(vararg params: GeoPoint): Road? {
+            val routePoints = ArrayList<GeoPoint>()
+
+            // Obtener la ubicación actual del usuario
+            val currentLocation = getCurrentLocation()
+            if (currentLocation != null) {
+                routePoints.add(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+            } else {
+                //showToast("No se pudo obtener la ubicación actual")
+                return null
+            }
+
+            // Agregar el destino a los puntos de la ruta
+            routePoints.add(params[0]) // Destino
+
+            return roadManager.getRoad(routePoints)
+        }
+
+        override fun onPostExecute(result: Road?) {
+            super.onPostExecute(result)
+            if (result != null) {
+                // Dibujar la ruta
+                drawRoadOverlay(result)
+            } else {
+                //showToast("Error al obtener la ruta")
+            }
+        }
+    }
+
+    private fun drawRoadOverlay(road: Road) {
+        roadOverlay?.let { binding.osmMap.overlays.remove(it) }
+        roadOverlay = RoadManager.buildRoadOverlay(road)
+        roadOverlay?.outlinePaint?.color = ContextCompat.getColor(this, R.color.green)
+        roadOverlay?.outlinePaint?.strokeWidth = 10f
+        binding.osmMap.overlays.add(roadOverlay)
     }
 
     override fun onPause() {

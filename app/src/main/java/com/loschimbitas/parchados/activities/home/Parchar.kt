@@ -309,9 +309,6 @@ class Parchar : AppCompatActivity() {
         }
     }
 
-    private fun drawRoute(start: GeoPoint, finish: GeoPoint) {
-        GetRouteTask().execute(finish)
-    }
 
     private fun drawRoadOverlay(road: Road) {
         roadOverlay?.let { binding.osmMap.overlays.remove(it) }
