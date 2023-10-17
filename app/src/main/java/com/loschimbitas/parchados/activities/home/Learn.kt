@@ -109,11 +109,11 @@ class Learn : AppCompatActivity() {
 
             // establecimiento de puntos(marcadores)
             showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude),"Mi ubicacion","UBI")
-            showMarker(GeoPoint(4.6318,-74.0667),"Ping Pong", "PING")
-            showMarker(GeoPoint(4.6285,-74.0647),"Fulbol","FUTB")
-            showMarker(GeoPoint(4.6256,-74.0653),"Tenis","TENI")
-            showMarker(GeoPoint(4.6454,-74.0618),"Voleibol","VOLE")
-            showMarker(GeoPoint(4.6318,-74.0615),"Basketball","BASK")
+            showMarker(GeoPoint(4.6318,-74.0667),"Aprende Ping Pong", "PING")
+            showMarker(GeoPoint(4.6285,-74.0647),"Aprende Fulbol","FUTB")
+            showMarker(GeoPoint(4.6256,-74.0653),"Aprende Tenis","TENI")
+            showMarker(GeoPoint(4.6454,-74.0618),"Aprende Voleibol","VOLE")
+            showMarker(GeoPoint(4.6318,-74.0615),"Aprende Basketball","BASK")
 
         } else {
             Toast.makeText(this, "Ubicación no encontrada", Toast.LENGTH_SHORT).show()
