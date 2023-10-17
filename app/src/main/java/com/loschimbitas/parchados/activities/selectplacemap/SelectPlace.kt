@@ -4,10 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,8 +30,12 @@ import org.osmdroid.api.IMapController
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.Polyline
+import java.io.IOException
+import java.util.Locale
 
 class SelectPlace : AppCompatActivity() {
 
@@ -59,6 +66,10 @@ class SelectPlace : AppCompatActivity() {
         roadManager = OSRMRoadManager(this, "ANDROID")
 
         initialize()
+
+        // Agrega el Listener para detectar clics en el mapa
+        val mapClickListener = MapClickListener()
+        binding.osmMap.overlays.add(mapClickListener)
     }
 
     // inicio solicitud permisos
@@ -251,4 +262,43 @@ class SelectPlace : AppCompatActivity() {
         else
             onBackPressed()
     }
+
+
+    private inner class MapClickListener : Overlay() {
+        override fun onSingleTapConfirmed(event: MotionEvent, mapView: MapView): Boolean {
+            val projection = mapView.projection
+            val touchedPoint = projection.fromPixels(event.x.toInt(), event.y.toInt())
+
+            val selectedLocation = Location("")
+            selectedLocation.latitude = touchedPoint.latitude
+            selectedLocation.longitude = touchedPoint.longitude
+
+            // Muestra la dirección en un Toast
+            showCustomToast("Dirección: ${getAddressFromLocation(selectedLocation)}", R.drawable.tenis)
+
+            // Agrega un marcador
+            showMarker(GeoPoint(touchedPoint.latitude, touchedPoint.longitude), "Ubicación seleccionada", "SELECCIONADA")
+
+            return true
+        }
+    }
+
+    private fun getAddressFromLocation(location: Location): String {
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: List<Address>?
+
+        try {
+            addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return "Dirección no disponible"
+        }
+
+        return if (addresses != null && addresses.isNotEmpty()) {
+            addresses[0].getAddressLine(0)
+        } else {
+            "Dirección no disponible"
+        }
+    }
+
 }
