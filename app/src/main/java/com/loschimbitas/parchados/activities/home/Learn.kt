@@ -12,21 +12,43 @@ import com.loschimbitas.parchados.activities.globales.Globales
 import com.loschimbitas.parchados.activities.learning.CreateClass
 import com.loschimbitas.parchados.activities.learning.JoinAClass
 import com.loschimbitas.parchados.databinding.ActivityLearnBinding
+import com.loschimbitas.parchados.databinding.ActivityParcharBinding
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
+import org.osmdroid.views.overlay.Polyline
 
 class Learn : AppCompatActivity() {
 
     private lateinit var binding: ActivityLearnBinding
+    private var roadOverlay: Polyline?= null
+    private lateinit var roadManager: RoadManager
+
+
+    private val locationPermissions = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                // Precise location access granted.
+            }
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                // Only approximate location access granted.
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLearnBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        askForPermissions()
 
 //        For users that have not permission to start class (students)
 //        binding.linearLayoutStartClass.layoutParams.height = (5 * getResources().getDisplayMetrics().density + 0.5f).toInt()
@@ -34,7 +56,21 @@ class Learn : AppCompatActivity() {
 //        binding.textViewStartClass.textSize = 0f
 //        binding.buttonStartClass.visibility = LinearLayout.INVISIBLE
 //        binding.buttonStartClass.isEnabled = false
+
+
+        roadManager = OSRMRoadManager(this, "ANDROID")
+
+
         initialize()
+    }
+
+    // inicio solicitud permisos
+    private fun askForPermissions() {
+        locationPermissions.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ))
     }
 
     override fun onResume() {
