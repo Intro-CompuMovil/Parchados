@@ -185,7 +185,12 @@ class Learn : AppCompatActivity() {
         val layout: View = inflater.inflate(R.layout.toast_custom, findViewById(R.id.toast_layout_root))
 
         val textView: TextView = layout.findViewById(R.id.textViewToast)
-        textView.text = "En camino a $markerName"
+
+        if(markerName == "Mi ubicacion"){
+            textView.text = "$markerName"
+        }else{
+            textView.text = "En camino a $markerName"
+        }
 
         val imageView: ImageView = layout.findViewById(R.id.imageViewToast)
         imageView.setImageResource(markerIconResource)
