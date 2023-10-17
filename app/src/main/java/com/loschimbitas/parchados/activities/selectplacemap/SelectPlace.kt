@@ -55,6 +55,8 @@ class SelectPlace : AppCompatActivity() {
     private lateinit var binding: ActivitySelectPlaceBinding
     private var roadOverlay: Polyline?= null
     private lateinit var roadManager: RoadManager
+    private var previousMarker: Marker? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +130,7 @@ class SelectPlace : AppCompatActivity() {
         }
     }
 
-    private fun showMarker(geoPoint: GeoPoint, markerName: String, tipo: String) {
+    private fun showMarker(geoPoint: GeoPoint, markerName: String, tipo: String): Marker {
         // Crea y muestra un nuevo marcador en la ubicación proporcionada
         val marker = Marker(binding.osmMap)
         marker.title = markerName
@@ -143,7 +145,7 @@ class SelectPlace : AppCompatActivity() {
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
 
         // Icono personalizado según el deporte
-        when(tipo){
+        when (tipo) {
             "UBI" -> marker.icon = resources.getDrawable(R.drawable.persona, theme)
             "PING" -> marker.icon = resources.getDrawable(R.drawable.pingpong, theme)
             "TENI" -> marker.icon = resources.getDrawable(R.drawable.tenis, theme)
@@ -153,7 +155,11 @@ class SelectPlace : AppCompatActivity() {
         }
 
         binding.osmMap.overlays.add(marker)
+
+        // Retorna el marcador creado
+        return marker
     }
+
 
     private fun showCustomToast(markerName: String, markerIconResource: Int) {
         val inflater: LayoutInflater = layoutInflater
@@ -276,12 +282,21 @@ class SelectPlace : AppCompatActivity() {
             // Muestra la dirección en un Toast
             showCustomToast("Dirección: ${getAddressFromLocation(selectedLocation)}", R.drawable.tenis)
 
-            // Agrega un marcador
-            showMarker(GeoPoint(touchedPoint.latitude, touchedPoint.longitude), "Ubicación seleccionada", "SELECCIONADA")
+            // Elimina el marcador anterior si existe
+            previousMarker?.let {
+                binding.osmMap.overlays.remove(it)
+            }
+
+            // Agrega un nuevo marcador
+            val newMarker = showMarker(GeoPoint(touchedPoint.latitude, touchedPoint.longitude), "Ubicación seleccionada", "SELECCIONADA")
+
+            // Actualiza la referencia al nuevo marcador como el anterior
+            previousMarker = newMarker
 
             return true
         }
     }
+
 
     private fun getAddressFromLocation(location: Location): String {
         val geocoder = Geocoder(this, Locale.getDefault())
