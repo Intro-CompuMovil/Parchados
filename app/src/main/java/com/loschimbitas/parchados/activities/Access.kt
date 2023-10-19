@@ -44,6 +44,8 @@ class Access : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+        binding.inputPassword.text.clear()
+        binding.inputUserOrEmail.text.clear()
     }
 
     /**
