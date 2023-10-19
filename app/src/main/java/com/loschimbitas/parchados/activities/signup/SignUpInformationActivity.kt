@@ -40,6 +40,17 @@ class SignUpInformationActivity : AppCompatActivity() {
      */
     private fun initListeners() {
         saveChanges()
+        clearInputs()
+    }
+
+    private fun clearInputs(){
+        binding.inputEmail.text.clear()
+        binding.inputEmailConfirmation.text.clear()
+        binding.inputFirstName.text.clear()
+        binding.inputLastName.text.clear()
+        binding.inputPassword.text.clear()
+        binding.inputPasswordConfirmation.text.clear()
+        binding.inputUsername.text.clear()
     }
 
     private fun saveChanges() {
@@ -103,7 +114,10 @@ class SignUpInformationActivity : AppCompatActivity() {
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
 
-            startActivity(Intent(this, Parchar::class.java))
+            val intent = Intent(this, Parchar::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }
