@@ -101,9 +101,7 @@ class SignUpInformationActivity : AppCompatActivity() {
             userGlobal.email = binding.inputEmail.text.toString()
             userGlobal.password = binding.inputPassword.text.toString()
 
-            val firebaseAuth = FirebaseAuth.getInstance()
-            val user =
-                firebaseAuth.createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
 
             startActivity(Intent(this, Parchar::class.java))
         }
