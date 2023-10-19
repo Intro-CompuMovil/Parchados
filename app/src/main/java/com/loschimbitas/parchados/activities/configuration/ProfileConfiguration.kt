@@ -60,11 +60,14 @@ class ProfileConfiguration : AppCompatActivity() {
         binding = ActivityProfileConfigurationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initialize()
+        if (userGlobal.imageUrl != "") {
+            setUpPlayerInformation()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        if (!userGlobal.imageUrl.equals("")) {
+        if (userGlobal.imageUrl != "") {
             setUpPlayerInformation()
         }
     }

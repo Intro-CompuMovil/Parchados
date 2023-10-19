@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +10,9 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.configuration.ProfileConfiguration"
-        >
+        android:layout_height="wrap_content"
+        tools:context=".activities.configuration.ProfileConfiguration">
 
         <TextView
             android:id="@+id/title_profile_configuration"
@@ -39,7 +36,7 @@
             android:layout_width="216dp"
             android:layout_height="216dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/example_profile_photo"
+            android:src="@drawable/icon_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,6 @@
 package com.loschimbitas.parchados.activities.configuration
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.Access
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.databinding.ActivityConfigurationMenuBinding
@@ -48,11 +50,17 @@ class ConfigurationMenu : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
+        setUpPlayerInformation()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpPlayerInformation() {
-        binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
-        binding.profileName.text = userGlobal.username
+        if (userGlobal.imageUrl.isEmpty())
+            binding.profileImage.setImageResource(R.drawable.icon_user)
+        else
+            binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+
+        binding.profileName.text = " "+ userGlobal.username
     }
 
     /**

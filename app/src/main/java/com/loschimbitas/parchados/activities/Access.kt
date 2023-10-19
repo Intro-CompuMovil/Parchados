@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.loschimbitas.parchados.activities.globales.Globales
+import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.home.Parchar
 import com.loschimbitas.parchados.activities.signup.SignUpInformationActivity
 import com.loschimbitas.parchados.databinding.ActivityAccessBinding
@@ -30,9 +32,18 @@ class Access : AppCompatActivity() {
         initialize()
     }
 
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            userGlobal.email = currentUser.email.toString()
+            userGlobal.username = currentUser.displayName.toString()
 
-
-
+            val intent = Intent(this, Parchar::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
 
     /**
      * @Name: initialize
@@ -121,7 +132,7 @@ class Access : AppCompatActivity() {
                 .addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
                     if (task.isSuccessful) {
                         // La autenticación fue exitosa
-                        val user: FirebaseUser? = auth.currentUser
+                        auth.currentUser
                         val intent = Intent(this, Parchar::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)

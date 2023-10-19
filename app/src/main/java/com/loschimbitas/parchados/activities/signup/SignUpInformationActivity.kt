@@ -113,6 +113,12 @@ class SignUpInformationActivity : AppCompatActivity() {
             userGlobal.password = binding.inputPassword.text.toString()
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
+            // save display name (username)
+            FirebaseAuth.getInstance().currentUser?.updateProfile(
+                com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                    .setDisplayName(userGlobal.username)
+                    .build()
+            )
 
             val intent = Intent(this, Parchar::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
