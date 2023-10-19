@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.loschimbitas.parchados.activities.configuration.ProfileConfiguration
 import com.loschimbitas.parchados.databinding.ActivitySignUpInformationBinding
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
+import com.loschimbitas.parchados.activities.home.Parchar
 
 class SignUpInformationActivity : AppCompatActivity() {
 
@@ -98,8 +99,7 @@ class SignUpInformationActivity : AppCompatActivity() {
             userGlobal.email = binding.inputEmail.text.toString()
             userGlobal.password = binding.inputPassword.text.toString()
 
-            startActivity(Intent(this, ProfileConfiguration::class.java))
-
+            startActivity(Intent(this, Parchar::class.java))
         }
     }
 }
