@@ -59,8 +59,6 @@ class ProfileConfiguration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileConfigurationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         initialize()
     }
 
@@ -92,16 +90,6 @@ class ProfileConfiguration : AppCompatActivity() {
      */
     private fun initialize() {
         initListeners()
-        saveConfiguration()
-    }
-
-    private fun saveConfiguration() {
-        binding.buttonSave.setOnClickListener {
-            userGlobal.imageUrl = tempImageUri.toString()
-            userGlobal.about = binding.editAbout.text.toString()
-            userGlobal.age = binding.editAge.text.toString()
-            Toast.makeText(this, "Configuration saved", Toast.LENGTH_SHORT).show()
-        }
     }
 
     /**
@@ -119,6 +107,13 @@ class ProfileConfiguration : AppCompatActivity() {
 
         binding.BtnUploadPhoto.setOnClickListener {
             checkGalleryPermission()
+        }
+
+        binding.buttonSave.setOnClickListener {
+            userGlobal.imageUrl = tempImageUri.toString()
+            userGlobal.about = binding.editAbout.text.toString()
+            userGlobal.age = binding.editAge.text.toString()
+            Toast.makeText(this, "Configuration saved", Toast.LENGTH_SHORT).show()
         }
     }
 
