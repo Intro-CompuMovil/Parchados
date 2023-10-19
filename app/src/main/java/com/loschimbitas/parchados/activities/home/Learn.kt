@@ -1,6 +1,7 @@
 package com.loschimbitas.parchados.activities.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -20,6 +21,7 @@ import androidx.core.net.toUri
 import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.globales.Globales
+import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.learning.CreateClass
 import com.loschimbitas.parchados.activities.learning.JoinAClass
 import com.loschimbitas.parchados.databinding.ActivityLearnBinding
@@ -260,9 +262,14 @@ class Learn : AppCompatActivity() {
         setUpPlayerInformation()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpPlayerInformation() {
-        binding.profileImage.setImageURI(Globales.userGlobal.imageUrl.toUri())
-        binding.profileName.text = Globales.userGlobal.username
+        if (Globales.userGlobal.imageUrl.isEmpty())
+            binding.profileImage.setImageResource(R.drawable.icon_user)
+        else
+            binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+
+        binding.profileName.text = userGlobal.username
     }
 
     /**

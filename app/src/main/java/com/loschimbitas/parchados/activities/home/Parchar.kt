@@ -73,9 +73,11 @@ class Parchar : AppCompatActivity() {
     // inicio onResume
     override fun onResume() {
         super.onResume()
+        askForPermissions()
+
 
         // Variables de usuario global
-        if (!Globales.userGlobal.imageUrl.equals("")) {
+        if (!userGlobal.imageUrl.equals("")) {
             setUpPlayerInformation()
         }
 
