@@ -27,7 +27,6 @@ class Access : AppCompatActivity() {
         binding = ActivityAccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
-
         initialize()
     }
 
@@ -102,13 +101,18 @@ class Access : AppCompatActivity() {
      */
     private fun setUpSignInListener() {
         binding.buttonSignIn.setOnClickListener {
+            if (binding.inputPassword.text.isEmpty() || binding.inputUserOrEmail.text.isEmpty()) {
+                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Change to the parchar information screen
             val email = binding.inputUserOrEmail.text.toString()
             val password = binding.inputPassword.text.toString()
 
             if (!isEmailValid(email)) {
                 // Mostrar un mensaje de error si el correo electrónico no es válido
-                Toast.makeText(this, "Correo electrónico no válido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "invalid email", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -124,7 +128,7 @@ class Access : AppCompatActivity() {
                         finish() // Esto cierra la actividad actual (inicio de sesión)
                     } else {
                         // La autenticación falló
-                        Toast.makeText(this, "La autenticación falló.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Failed authentication", Toast.LENGTH_SHORT).show()
                     }
                 })
 
