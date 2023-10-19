@@ -1,14 +1,12 @@
 package com.loschimbitas.parchados.activities.signup
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.loschimbitas.parchados.activities.configuration.ProfileConfiguration
-import com.loschimbitas.parchados.databinding.ActivitySignUpInformationBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.home.Parchar
+import com.loschimbitas.parchados.databinding.ActivitySignUpInformationBinding
 
 class SignUpInformationActivity : AppCompatActivity() {
 
@@ -63,11 +61,13 @@ class SignUpInformationActivity : AppCompatActivity() {
                 binding.inputEmail.error = "Please enter your email"
                 return@setOnClickListener
             }
-            if (!binding.inputEmail.text.toString().equals(binding.inputEmailConfirmation.text.toString())){
+            if (!binding.inputEmail.text.toString()
+                    .equals(binding.inputEmailConfirmation.text.toString())
+            ) {
                 binding.inputEmailConfirmation.error = "Emails do not match"
                 return@setOnClickListener
             }
-            if(!binding.inputEmail.text.toString().contains("@")){
+            if (!binding.inputEmail.text.toString().contains("@")) {
                 binding.inputEmail.error = "Please enter a valid email"
                 return@setOnClickListener
             }
@@ -88,7 +88,9 @@ class SignUpInformationActivity : AppCompatActivity() {
                 binding.inputPasswordConfirmation.error = "Please confirm your password"
                 return@setOnClickListener
             }
-            if (!binding.inputPassword.text.toString().equals(binding.inputPasswordConfirmation.text.toString())) {
+            if (!binding.inputPassword.text.toString()
+                    .equals(binding.inputPasswordConfirmation.text.toString())
+            ) {
                 binding.inputPasswordConfirmation.error = "Passwords do not match"
                 return@setOnClickListener
             }
@@ -98,6 +100,10 @@ class SignUpInformationActivity : AppCompatActivity() {
             userGlobal.username = binding.inputUsername.text.toString()
             userGlobal.email = binding.inputEmail.text.toString()
             userGlobal.password = binding.inputPassword.text.toString()
+
+            val firebaseAuth = FirebaseAuth.getInstance()
+            val user =
+                firebaseAuth.createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
 
             startActivity(Intent(this, Parchar::class.java))
         }
