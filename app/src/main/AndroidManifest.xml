@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Use read contacts to print on listview -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- Use camera to take photo -->
     <uses-permission android:name="android.permission.CAMERA" />
 

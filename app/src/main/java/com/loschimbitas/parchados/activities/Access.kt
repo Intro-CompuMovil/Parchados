@@ -1,17 +1,23 @@
 package com.loschimbitas.parchados.activities
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.loschimbitas.parchados.R
 import com.loschimbitas.parchados.activities.globales.Globales
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.home.Parchar
@@ -131,6 +137,8 @@ class Access : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
                     if (task.isSuccessful) {
+
+                        showSignInNotification()
                         // La autenticación fue exitosa
                         auth.currentUser
                         val intent = Intent(this, Parchar::class.java)
@@ -146,7 +154,31 @@ class Access : AppCompatActivity() {
         }
     }
 
+    private fun showSignInNotification() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channelId = "mi_canal_id"
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Nombre del Canal",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.notification)
+            .setContentTitle("Inicio de Sesión Exitoso")
+            .setContentText("¡Bienvenido de nuevo!")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .extend(
+                NotificationCompat.WearableExtender()
+                    .setBridgeTag("tagOne"))
+        notificationManager.notify(1, builder.build())
+
+
+    }
     private fun isEmailValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
