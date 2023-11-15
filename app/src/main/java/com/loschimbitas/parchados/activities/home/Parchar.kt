@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,6 +43,16 @@ class Parchar : AppCompatActivity() {
     private lateinit var binding: ActivityParcharBinding
     private var roadOverlay:Polyline?= null
     private lateinit var roadManager: RoadManager
+    private lateinit var sportsListView: ListView
+
+    private val sportsList = listOf(
+        Sport("Ping Pong", R.drawable.pingpong),
+        Sport("Tenis", R.drawable.tenis),
+        Sport("Baloncesto", R.drawable.basketball),
+        Sport("Fútbol", R.drawable.futbol),
+        Sport("Voleibol", R.drawable.voleibol),
+        Sport("Todos", R.drawable.deportes),
+    )
 
 
     private val locationPermissions = registerForActivityResult(
@@ -65,6 +76,10 @@ class Parchar : AppCompatActivity() {
         askForPermissions()
 
         roadManager = OSRMRoadManager(this, "ANDROID")
+
+        sportsListView = findViewById(R.id.listview_sports)
+        val sportsAdapter = SportsAdapter(this, sportsList)
+        sportsListView.adapter = sportsAdapter
 
         initialize()
 
