@@ -8,9 +8,13 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -44,6 +48,23 @@ class Learn : AppCompatActivity() {
     private lateinit var binding: ActivityLearnBinding
     private var roadOverlay: Polyline?= null
     private lateinit var roadManager: RoadManager
+    private lateinit var sportsListView: ListView
+
+    private var selectedSportType: String? = null
+
+    private var originalSportsList: List<Sport> = ArrayList()
+    private var filteredSportsList: List<Sport> = ArrayList()
+
+
+
+    private val sportsList = listOf(
+        Sport("Ping Pong", R.drawable.pingpong, "PING"),
+        Sport("Tenis", R.drawable.tenis, "TENI"),
+        Sport("Baloncesto", R.drawable.basketball,  "BASK"),
+        Sport("Fútbol", R.drawable.futbol,  "FUTB"),
+        Sport("Voleibol", R.drawable.voleibol,  "VOLE"),
+        Sport("Todos", R.drawable.deportes,  "TODOS"),
+    )
 
 
     private val locationPermissions = registerForActivityResult(
@@ -75,6 +96,37 @@ class Learn : AppCompatActivity() {
 
 
         roadManager = OSRMRoadManager(this, "ANDROID")
+
+        sportsListView = findViewById(R.id.listview_sports)
+        originalSportsList = sportsList
+        filteredSportsList = sportsList
+
+        val sportsAdapter = SportsAdapter(this, filteredSportsList)
+        sportsListView.adapter = sportsAdapter
+
+
+
+
+        sportsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedSport = filteredSportsList[position]
+            selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
+            showCustomToast(selectedSport.name, selectedSport.iconResourceId)
+            refreshMarkers() // Actualiza los marcadores en el mapa
+        }
+
+        val searchEditText = findViewById<EditText>(R.id.edittext_search)
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                charSequence?.let {
+                    filterList(it.toString())
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {}
+        })
 
 
         initialize()
@@ -123,6 +175,22 @@ class Learn : AppCompatActivity() {
 
     }
 
+    private fun filterList(query: String) {
+        filteredSportsList = originalSportsList.filter {
+            it.name.toLowerCase().contains(query.toLowerCase())
+        }
+
+        val sportsAdapter = SportsAdapter(this, filteredSportsList)
+        sportsListView.adapter = sportsAdapter
+
+        sportsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedSport = filteredSportsList[position]
+            selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
+            showCustomToast(selectedSport.name, selectedSport.iconResourceId)
+            refreshMarkers() // Actualiza los marcadores en el mapa
+        }
+    }
+
     private fun getCurrentLocation(): Location? {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
         return try {
@@ -144,30 +212,33 @@ class Learn : AppCompatActivity() {
     }
 
     private fun showMarker(geoPoint: GeoPoint, markerName: String, tipo: String) {
-        // Crea y muestra un nuevo marcador en la ubicación proporcionada
-        val marker = Marker(binding.osmMap)
-        marker.title = markerName
-        marker.position = geoPoint
+        // Verifica si se ha seleccionado un tipo y si el tipo coincide con el marcador actual o es tipo "UBI"
+        if (selectedSportType == null || selectedSportType == tipo || tipo == "UBI") {
+            // Crea y muestra un nuevo marcador en la ubicación proporcionada
+            val marker = Marker(binding.osmMap)
+            marker.title = markerName
+            marker.position = geoPoint
 
-        marker.setOnMarkerClickListener { _, _ ->
-            calculateRouteToMarker(geoPoint)
-            showCustomToast(markerName, getMarkerIconResource(tipo))
-            true
+            marker.setOnMarkerClickListener { _, _ ->
+                calculateRouteToMarker(geoPoint)
+                showCustomToast(markerName, getMarkerIconResource(tipo))
+                true
+            }
+
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+
+            // Icono personalizado según el deporte
+            when (tipo) {
+                "UBI" -> marker.icon = resources.getDrawable(R.drawable.persona, theme)
+                "PING" -> marker.icon = resources.getDrawable(R.drawable.pingpong, theme)
+                "TENI" -> marker.icon = resources.getDrawable(R.drawable.tenis, theme)
+                "BASK" -> marker.icon = resources.getDrawable(R.drawable.basketball, theme)
+                "FUTB" -> marker.icon = resources.getDrawable(R.drawable.futbol, theme)
+                "VOLE" -> marker.icon = resources.getDrawable(R.drawable.voleibol, theme)
+            }
+
+            binding.osmMap.overlays.add(marker)
         }
-
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-
-        // Icono personalizado según el deporte
-        when(tipo){
-            "UBI" -> marker.icon = resources.getDrawable(R.drawable.persona, theme)
-            "PING" -> marker.icon = resources.getDrawable(R.drawable.pingpong, theme)
-            "TENI" -> marker.icon = resources.getDrawable(R.drawable.tenis, theme)
-            "BASK" -> marker.icon = resources.getDrawable(R.drawable.basketball, theme)
-            "FUTB" -> marker.icon = resources.getDrawable(R.drawable.futbol, theme)
-            "VOLE" -> marker.icon = resources.getDrawable(R.drawable.voleibol, theme)
-        }
-
-        binding.osmMap.overlays.add(marker)
     }
 
     private fun getMarkerIconResource(tipo: String): Int {
@@ -179,6 +250,31 @@ class Learn : AppCompatActivity() {
             "FUTB" -> R.drawable.futbol
             "VOLE" -> R.drawable.voleibol
             else -> R.drawable.parche
+        }
+    }
+
+    private fun refreshMarkers() {
+        binding.osmMap.overlays.clear() // Limpia todos los overlays actuales
+
+        // Obtén la ubicación actual
+        val currentLocation = getCurrentLocation()
+
+        // Verificación de ubicación actual
+        if (currentLocation != null) {
+            val mapController: IMapController = binding.osmMap.controller
+
+            mapController.setZoom(18.0)
+            mapController.setCenter(GeoPoint(currentLocation.latitude, currentLocation.longitude))
+
+            // Establecimiento de puntos(marcadores)
+            showMarker(GeoPoint(currentLocation.latitude, currentLocation.longitude), "Mi ubicacion", "UBI")
+            showMarker(GeoPoint(4.6318, -74.0667), "Ping Pong", "PING")
+            showMarker(GeoPoint(4.6285, -74.0647), "Fulbol", "FUTB")
+            showMarker(GeoPoint(4.6256, -74.0653), "Tenis", "TENI")
+            showMarker(GeoPoint(4.6454, -74.0618), "Voleibol", "VOLE")
+            showMarker(GeoPoint(4.6318, -74.0615), "Basketball", "BASK")
+        } else {
+            Toast.makeText(this, "Ubicación no encontrada", Toast.LENGTH_SHORT).show()
         }
     }
 
