@@ -97,9 +97,6 @@ class Learn : AppCompatActivity() {
         val sportsAdapter = SportsAdapter(this, filteredSportsList)
         sportsListView.adapter = sportsAdapter
 
-
-
-
         sportsListView.setOnItemClickListener { _, _, position, _ ->
             val selectedSport = filteredSportsList[position]
             selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
@@ -122,7 +119,7 @@ class Learn : AppCompatActivity() {
         })
 
 
-        binding = ActivityLearnBinding.inflate(layoutInflater)
+        
 
         if (Globales.userGlobal.isProfessor == false) {
             // Si el usuario no es profesor, oculta el bloque de inicio de la clase

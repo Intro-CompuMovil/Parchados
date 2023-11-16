@@ -130,19 +130,18 @@
         tools:ignore="RtlCompat" />
 
 
-
     <ListView
         android:id="@+id/listview_sports"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white"
+        android:background="#626262"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_sports" />
-
 
     <LinearLayout
         android:id="@+id/linear_layout_parchar_or_learn"
