@@ -1,14 +1,14 @@
 package com.loschimbitas.parchados.model
 
 data class User(
-    val id: Long,
-    var username: String,
-    var firstName: String,
-    var lastName: String,
-    var email: String,
-    var password: String,
+    val id: Long? = null,
+    var username: String? = null,
+    var firstName: String? = null,
+    var lastName: String? = null,
+    var email: String? = null,
+    var password: String? = null,
     var isProfessor: Boolean,
-    var about: String,
-    var imageUrl: String,
-    var age: String
+    var about: String? = null,
+    var imageUrl: String? = null,
+    var age: String? = null
 )

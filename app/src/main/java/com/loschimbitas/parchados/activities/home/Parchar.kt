@@ -28,17 +28,14 @@ import com.loschimbitas.parchados.activities.configuration.ConfigurationMenu
 import com.loschimbitas.parchados.activities.globales.Globales
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.parchar.CreateParche
-import com.loschimbitas.parchados.activities.parchar.JoinAParche
 import com.loschimbitas.parchados.databinding.ActivityParcharBinding
 import org.osmdroid.api.IMapController
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
 import org.osmdroid.bonuspack.routing.Road
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
-import org.osmdroid.views.overlay.TilesOverlay
 import java.io.IOException
 
 class Parchar : AppCompatActivity() {
@@ -194,12 +191,11 @@ class Parchar : AppCompatActivity() {
         setUpPlayerInformation()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setUpPlayerInformation() {
-        if (userGlobal.imageUrl.isEmpty())
+        if (userGlobal.imageUrl?.isEmpty() == true || userGlobal.imageUrl == "fake")
             binding.profileImage.setImageResource(R.drawable.icon_user)
         else
-            binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+            binding.profileImage.setImageURI(userGlobal.imageUrl?.toUri())
 
         binding.profileName.text = " " + userGlobal.username
     }

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.loschimbitas.parchados.activities.globales.Globales.Companion.userGlobal
 import com.loschimbitas.parchados.activities.home.Parchar
 import com.loschimbitas.parchados.databinding.ActivitySignUpInformationBinding
@@ -11,6 +13,10 @@ import com.loschimbitas.parchados.databinding.ActivitySignUpInformationBinding
 class SignUpInformationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpInformationBinding
+    //    Base de datos
+    private val database = FirebaseDatabase.getInstance()
+    private lateinit var myRef: DatabaseReference
+//    fin variables base de datos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,13 +118,19 @@ class SignUpInformationActivity : AppCompatActivity() {
             userGlobal.email = binding.inputEmail.text.toString()
             userGlobal.password = binding.inputPassword.text.toString()
 
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGlobal.email, userGlobal.password)
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGlobal.email!!,
+                userGlobal.password!!
+            )
             // save display name (username)
             FirebaseAuth.getInstance().currentUser?.updateProfile(
                 com.google.firebase.auth.UserProfileChangeRequest.Builder()
                     .setDisplayName(userGlobal.username)
                     .build()
             )
+
+            // guardar en base de datos
+            myRef = database.getReference("usuarios/${userGlobal.email}")
+            myRef.setValue(userGlobal)
 
             val intent = Intent(this, Parchar::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

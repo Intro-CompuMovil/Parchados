@@ -62,6 +62,7 @@ dependencies {
     implementation ("org.mapsforge:mapsforge-map-android:0.12.0")
     implementation ("com.github.MKergall:osmbonuspack:6.9.0")
     implementation ("com.google.android.gms:play-services-maps:17.0.1")
+    implementation("com.google.firebase:firebase-database:20.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

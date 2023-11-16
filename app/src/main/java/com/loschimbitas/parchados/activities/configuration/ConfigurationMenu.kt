@@ -55,10 +55,10 @@ class ConfigurationMenu : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setUpPlayerInformation() {
-        if (userGlobal.imageUrl.isEmpty())
+        if (userGlobal.imageUrl?.isEmpty() == true || userGlobal.imageUrl == "fake")
             binding.profileImage.setImageResource(R.drawable.icon_user)
         else
-            binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+            binding.profileImage.setImageURI(userGlobal.imageUrl?.toUri())
 
         binding.profileName.text = " "+ userGlobal.username
     }

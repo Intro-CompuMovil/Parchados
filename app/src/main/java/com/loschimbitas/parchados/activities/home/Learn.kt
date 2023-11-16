@@ -358,12 +358,11 @@ class Learn : AppCompatActivity() {
         setUpPlayerInformation()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setUpPlayerInformation() {
-        if (Globales.userGlobal.imageUrl.isEmpty())
+        if (Globales.userGlobal.imageUrl?.isEmpty() == true)
             binding.profileImage.setImageResource(R.drawable.icon_user)
         else
-            binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+            binding.profileImage.setImageURI(userGlobal.imageUrl?.toUri())
 
         binding.profileName.text = userGlobal.username
     }

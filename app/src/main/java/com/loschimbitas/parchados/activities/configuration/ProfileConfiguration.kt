@@ -73,7 +73,7 @@ class ProfileConfiguration : AppCompatActivity() {
     }
 
     private fun setUpPlayerInformation() {
-        binding.profileImage.setImageURI(userGlobal.imageUrl.toUri())
+        binding.profileImage.setImageURI(userGlobal.imageUrl?.toUri())
     }
 
     private fun checkGalleryPermission() {
