@@ -8,6 +8,8 @@ import com.loschimbitas.parchados.databinding.ActivityCreateParcheBinding
 
 class CreateParche : AppCompatActivity() {
 
+    private val SELECT_PLACE_REQUEST_CODE = 1
+
     private lateinit var binding: ActivityCreateParcheBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +52,21 @@ class CreateParche : AppCompatActivity() {
         binding.buttonSelectPlaceOnMap.setOnClickListener {
             val intent = Intent(this, SelectPlace::class.java)
             intent.putExtra("root", "CreateParche")
-            startActivity(intent)
-            finish()
+            startActivityForResult(intent, SELECT_PLACE_REQUEST_CODE)
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == SELECT_PLACE_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Recibe la dirección seleccionada desde SelectPlace
+            val selectedAddress = data?.getStringExtra("selected_address")
+
+            // Muestra la dirección en el EditText
+            binding.edittextPlace.setText(selectedAddress)
+        }
+    }
+
+
 }

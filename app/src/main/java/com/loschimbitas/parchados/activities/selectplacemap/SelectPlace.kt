@@ -293,6 +293,15 @@ class SelectPlace : AppCompatActivity() {
             // Actualiza la referencia al nuevo marcador como el anterior
             previousMarker = newMarker
 
+            // Obtiene la dirección desde la ubicación seleccionada
+            val address = getAddressFromLocation(selectedLocation)
+
+            // Devuelve la dirección a la actividad anterior
+            val resultIntent = Intent()
+            resultIntent.putExtra("selected_address", address)
+            setResult(RESULT_OK, resultIntent)
+            finish()
+
             return true
         }
     }
