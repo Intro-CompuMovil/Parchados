@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,6 +46,17 @@ class Learn : AppCompatActivity() {
     private var roadOverlay: Polyline?= null
     private lateinit var roadManager: RoadManager
 
+    private lateinit var sportsListView: ListView
+
+    private val sportsList = listOf(
+        Sport("Ping Pong", R.drawable.pingpong, "PING"),
+        Sport("Tenis", R.drawable.tenis, "TENI"),
+        Sport("Baloncesto", R.drawable.basketball,  "BASK"),
+        Sport("Fútbol", R.drawable.futbol,  "FUTB"),
+        Sport("Voleibol", R.drawable.voleibol,  "VOLE"),
+        Sport("Todos", R.drawable.deportes,  "TODOS"),
+    )
+
 
     private val locationPermissions = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -75,6 +87,15 @@ class Learn : AppCompatActivity() {
 
 
         roadManager = OSRMRoadManager(this, "ANDROID")
+
+        sportsListView = findViewById(R.id.listview_sports)
+        val sportsAdapter = SportsAdapter(this, sportsList)
+        sportsListView.adapter = sportsAdapter
+
+        sportsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedSport = sportsList[position]
+            showCustomToast(selectedSport.name, selectedSport.iconResourceId)
+        }
 
 
         initialize()

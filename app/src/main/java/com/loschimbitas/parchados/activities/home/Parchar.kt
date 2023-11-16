@@ -46,12 +46,12 @@ class Parchar : AppCompatActivity() {
     private lateinit var sportsListView: ListView
 
     private val sportsList = listOf(
-        Sport("Ping Pong", R.drawable.pingpong),
-        Sport("Tenis", R.drawable.tenis),
-        Sport("Baloncesto", R.drawable.basketball),
-        Sport("Fútbol", R.drawable.futbol),
-        Sport("Voleibol", R.drawable.voleibol),
-        Sport("Todos", R.drawable.deportes),
+        Sport("Ping Pong", R.drawable.pingpong, "PING"),
+        Sport("Tenis", R.drawable.tenis, "TENI"),
+        Sport("Baloncesto", R.drawable.basketball,  "BASK"),
+        Sport("Fútbol", R.drawable.futbol,  "FUTB"),
+        Sport("Voleibol", R.drawable.voleibol,  "VOLE"),
+        Sport("Todos", R.drawable.deportes,  "TODOS"),
     )
 
 
@@ -80,6 +80,12 @@ class Parchar : AppCompatActivity() {
         sportsListView = findViewById(R.id.listview_sports)
         val sportsAdapter = SportsAdapter(this, sportsList)
         sportsListView.adapter = sportsAdapter
+
+        sportsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedSport = sportsList[position]
+            showCustomToast(selectedSport.name, selectedSport.iconResourceId)
+        }
+
 
         initialize()
 
@@ -344,23 +350,6 @@ class Parchar : AppCompatActivity() {
         roadOverlay?.outlinePaint?.color = ContextCompat.getColor(this, R.color.red)
         roadOverlay?.outlinePaint?.strokeWidth = 10f
         binding.osmMap.overlays.add(roadOverlay)
-    }
-
-    private fun buscarCiudadPorNombre(nombreCiudad: String): GeoPoint? {
-        val mGeocoder = Geocoder(baseContext)
-        val addressString = nombreCiudad
-        if (addressString.isNotEmpty()) {
-            try {
-                val addresses = mGeocoder.getFromLocationName(addressString, 2)
-                if (!addresses.isNullOrEmpty()) {
-                    val addressResult = addresses[0]
-                    return GeoPoint(addressResult.latitude, addressResult.longitude)
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-        return null
     }
 
 
