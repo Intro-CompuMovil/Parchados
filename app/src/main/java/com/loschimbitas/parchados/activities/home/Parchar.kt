@@ -90,9 +90,6 @@ class Parchar : AppCompatActivity() {
         val sportsAdapter = SportsAdapter(this, filteredSportsList)
         sportsListView.adapter = sportsAdapter
 
-
-
-
         sportsListView.setOnItemClickListener { _, _, position, _ ->
             val selectedSport = filteredSportsList[position]
             selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
