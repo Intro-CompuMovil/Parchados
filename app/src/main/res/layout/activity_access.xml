@@ -113,6 +113,21 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/checkbox_professor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profesor"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginRight="250dp"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
     <Button
         android:id="@+id/button_forgot_password"
         android:layout_width="wrap_content"

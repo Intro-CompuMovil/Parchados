@@ -29,12 +29,20 @@ class Access : AppCompatActivity() {
     private lateinit var binding: ActivityAccessBinding
     private lateinit var auth: FirebaseAuth
 
+    private var isProfessor: Boolean = false
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+
+        binding.checkboxProfessor.setOnCheckedChangeListener { _, isChecked ->
+            isProfessor = isChecked
+        }
+
         initialize()
     }
 
@@ -137,6 +145,8 @@ class Access : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
                     if (task.isSuccessful) {
+
+                        Globales.userGlobal.isProfessor = isProfessor
 
                         showSignInNotification()
                         // La autenticación fue exitosa

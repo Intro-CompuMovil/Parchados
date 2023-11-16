@@ -9,4 +9,8 @@ class Globales {
     companion object {
         var userGlobal = User(0, "Parchado","","", "", "", false, "", "", "" )
     }
+
+    fun getUserGlobal(): User {
+        return userGlobal
+    }
 }
