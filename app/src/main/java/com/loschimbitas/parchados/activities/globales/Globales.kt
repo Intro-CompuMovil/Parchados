@@ -10,4 +10,8 @@ class Globales {
         var userGlobal = User(0, "fake","fake","fake",
             "fake", "fake", false, "fake", "fake", "fake" )
     }
+
+    fun getUserGlobal(): User {
+        return userGlobal
+    }
 }

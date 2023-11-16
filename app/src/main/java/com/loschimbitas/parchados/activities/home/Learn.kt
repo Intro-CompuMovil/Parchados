@@ -87,13 +87,6 @@ class Learn : AppCompatActivity() {
 
         askForPermissions()
 
-//        For users that have not permission to start class (students)
-//        binding.linearLayoutStartClass.layoutParams.height = (5 * getResources().getDisplayMetrics().density + 0.5f).toInt()
-//        binding.textViewStartClass.text = ""
-//        binding.textViewStartClass.textSize = 0f
-//        binding.buttonStartClass.visibility = LinearLayout.INVISIBLE
-//        binding.buttonStartClass.isEnabled = false
-
 
         roadManager = OSRMRoadManager(this, "ANDROID")
 
@@ -127,6 +120,19 @@ class Learn : AppCompatActivity() {
 
             override fun afterTextChanged(editable: Editable?) {}
         })
+
+
+        binding = ActivityLearnBinding.inflate(layoutInflater)
+
+        if (Globales.userGlobal.isProfessor == false) {
+            // Si el usuario no es profesor, oculta el bloque de inicio de la clase
+            binding.linearLayoutStartClass.visibility = View.GONE
+        }
+
+        setContentView(binding.root)
+
+        askForPermissions()
+        roadManager = OSRMRoadManager(this, "ANDROID")
 
 
         initialize()
