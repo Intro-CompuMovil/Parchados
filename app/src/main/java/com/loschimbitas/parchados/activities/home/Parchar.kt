@@ -9,8 +9,11 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -47,6 +50,10 @@ class Parchar : AppCompatActivity() {
 
     private var selectedSportType: String? = null
 
+    private var originalSportsList: List<Sport> = ArrayList()
+    private var filteredSportsList: List<Sport> = ArrayList()
+
+
     private val sportsList = listOf(
         Sport("Ping Pong", R.drawable.pingpong, "PING"),
         Sport("Tenis", R.drawable.tenis, "TENI"),
@@ -80,16 +87,37 @@ class Parchar : AppCompatActivity() {
         roadManager = OSRMRoadManager(this, "ANDROID")
 
         sportsListView = findViewById(R.id.listview_sports)
-        val sportsAdapter = SportsAdapter(this, sportsList)
+        originalSportsList = sportsList
+        filteredSportsList = sportsList
+
+        val sportsAdapter = SportsAdapter(this, filteredSportsList)
         sportsListView.adapter = sportsAdapter
 
 
+
+
         sportsListView.setOnItemClickListener { _, _, position, _ ->
-            val selectedSport = sportsList[position]
+            val selectedSport = filteredSportsList[position]
             selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
             showCustomToast(selectedSport.name, selectedSport.iconResourceId)
             refreshMarkers() // Actualiza los marcadores en el mapa
         }
+
+
+        val searchEditText = findViewById<EditText>(R.id.edittext_search)
+
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                charSequence?.let {
+                    filterList(it.toString())
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable?) {}
+        })
+
 
 
         initialize()
@@ -228,7 +256,25 @@ class Parchar : AppCompatActivity() {
      */
     // ...
 
-    // ...
+
+
+    private fun filterList(query: String) {
+        filteredSportsList = originalSportsList.filter {
+            it.name.toLowerCase().contains(query.toLowerCase())
+        }
+
+        val sportsAdapter = SportsAdapter(this, filteredSportsList)
+        sportsListView.adapter = sportsAdapter
+
+        sportsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedSport = filteredSportsList[position]
+            selectedSportType = if (selectedSport.tipo == "TODOS") null else selectedSport.tipo
+            showCustomToast(selectedSport.name, selectedSport.iconResourceId)
+            refreshMarkers() // Actualiza los marcadores en el mapa
+        }
+    }
+
+
 
     private fun setUpMapViewListener() {
         binding.osmMap.setOnClickListener {
